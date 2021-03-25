@@ -1,24 +1,257 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Moive Finder App</title>
-</head>
+<!doctype html> 
+<!-- Per Foundation docs// Adding "no-js" prevents flash of unstyled content for a number of foundation components.  -->
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <!-- CDB stylesheet for foundation -->
+        <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+        <title>Movie Finder</title>
+    </head>
 
-<body>
+    <body><!-- Start Top Bar -->
+        <header class="top-bar">
+            <nav class="row">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="has-submenu">
+                            <!-- Preset category -->
+                            <a id="genresBtn" href="#">Genres</a>
+                            <ul class="submenu menu vertical" data-submenu>
+                                <li><a href="#">Recently Viewed</a></li>
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Adventure</a></li>
+                                <li><a href="#">Comedy</a></li>
+                                <li><a href="#">Crime</a></li>
+                                <li><a href="#">Drama</a></li>
+                                <li><a href="#">Horror</a></li>
+                                <li><a href="#">Musical</a></li>
+                                <li><a href="#">Science</a></li>
+                                <li><a href="#">War</a></li>
+                                <li><a href="#">Western</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Search Bar -->
+                <div class="top-bar-right">
+                    <ul class="menu">
+                        <li><input  id="searchPH" type="search" placeholder="Search by Criteria"></li>
+                        <li><button  id="searchBtn" type="button" class="button">Search</button></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- End Top Bar -->
+        <!-- IMG -->
+        <div class="" role="region" aria-label="Pictures">
+            <ul class="container">
+                <li class="">
+                    <img src="https://placehold.it/2000x750">
+                </li>
+            </ul>
+        </div>
+        <!-- Title for first section -->
+        <div class="row column text-center">
+            <h2>Recently Viewed</h2>
+            <!-- hr is a separator -->
+            <hr>
+        </div>
+        <section class="row small-up-2 large-up-4">
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+        </section>
+        <!-- hr is a separator -->
+        <hr>
+        <!-- Title for main section -->
+        <div class="row column text-center">
+            <h2>Choosen Genre</h2>
+            <hr>
+        </div>
+        <!-- All just temp colum to append to, or copy template to be made with js -->
+        <main class="row small-up-2 medium-up-3 large-up-6">
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+            <div class="column">
+                <a href="#" class="">
+                    <img class="thumbnail" src="https://placehold.it/300x400">
+                </a>
+            </div>
+        </main>
 
-    <header>
-    </header>
+        <!-- Test buttons for next page -->
+        <ul class="pagination-pointed pagination text-center" role="navigation" aria-label="Pagination">
+            <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
+            <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
+            <li><a class="pagination-pointed-button" href="#" aria-label="Page 2">2</a></li>
+            <li><a class="pagination-pointed-button" href="#" aria-label="Page 3">3</a></li>
+            <li><a class="pagination-pointed-button" href="#" aria-label="Page 4">4</a></li>
+            <li class="ellipsis" aria-hidden="true"></li>
+            <li><a class="pagination-pointed-button" href="#" aria-label="Page 12">12</a></li>
+            <li><a class="pagination-pointed-button" href="#" aria-label="Page 13">13</a></li>
+            <li class="pagination-next"><a class="pagination-pointed-button" href="#" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+        </ul>
+    
+        <!-- area to display best food options -->
+        <div class="callout large secondary">
+            <div class="row">
+                <div class="large-4 columns">
+                    <h5>Random Food Chooser</h5>
+                    <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit.</p>
+                </div>
+                <div class="large-3 large-offset-2 columns">
+                    <ul class="menu vertical">
+                        <li><a href="#">One</a></li>
+                    </ul>
+                </div>
+                <div class="large-3 columns">
+                    <ul class="menu vertical">
+                        <li><a href="#">One</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <main>
-    </main>
-
-    <footer>
-    </footer>
-    <script src="assets/js/script.js"></script>
-</body>
-
+        <!-- 2.1.4 Jquery to match foundation -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!--  CDN for foundation -->
+        <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+        <!-- example foundation used to call its own package -->
+        <script>
+            $(document).foundation();
+        </script>
+        
+    </body>
 </html>
