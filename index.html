@@ -9,8 +9,22 @@
 </head>
 
 <body>
-
+    <!-- We can use header as nav bar -->
     <header>
+        <select id='genresDropdown'>
+            <option value='none' selected disabled hidden>Select a Genre</option>
+        </select>
+        <form id='searchOptions'>
+            <select id='searchCriteria' selected='Search by:'>
+                <option value='none' selected diabled hidden>Search by:</option>
+                <option value='actor'>Actors</option>
+                <option value='yearReleased'>Year Released</option>
+                <option value='title'>Title</option>
+                <option value='rating'>Rating</option>
+            </select>
+            <input>
+            <button>Search</button>
+        </form>
     </header>
 
     <main>
