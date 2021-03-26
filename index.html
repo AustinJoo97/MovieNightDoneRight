@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/foundation.css" />
+    <!-- CDB stylesheet for foundation -->
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Moive Finder App</title>
+    <title>Movie Finder App</title>
 </head>
 
 <body>
@@ -27,6 +28,26 @@
             <button>Search</button>
         </form>
     </header>
+    <!-- Modal to be used to display movie info -->
+    <div class="row">
+        <div class="columns">
+          <p><a data-open="exampleModal1">Movie Modal</a></p>
+      
+          <div class="reveal" id="exampleModal1" data-reveal>
+            <h1>Image Goes Here</h1>
+            <p class="lead">Movie Title</p>
+            <p>Actors/Actresses: </p>
+            <p>Synopsis: </p>
+            <p>Rating: </p>
+            <p>Year Released: </p>
+            <p>Review: </p>
+            <p>Snacks: </p>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
     <main>
     </main>
@@ -34,13 +55,14 @@
     <footer>
     </footer>
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/what-input.js"></script>
-    <script src="js/vendor/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
-    <script src="assets/js/script.js"></script>
+<!-- 2.1.4 Jquery to match foundation -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!--  CDN for foundation -->
+<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+<!-- example foundation used to call its own package -->
+<script>
+    $(document).foundation();
+</script>
 </body>
 
 </html>
