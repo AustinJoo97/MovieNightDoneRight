@@ -59,6 +59,7 @@ function retrieveMovies(event){
 
     } else if(searchCriteriaChosen === 'rating'){
 
+        
     }
 }
 
