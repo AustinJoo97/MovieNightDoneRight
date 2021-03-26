@@ -65,7 +65,8 @@ function retrieveMovies(event){
 
 function getMoviesByTitle(queryString){
     console.log(`THIS IS QUERY STRING: ${queryString}`)
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${queryString}&language=en-US&include_adult=true`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${queryString}&language=en-US&include_adult=true&sort_by=popularity.desc`)
+    // Sort_by=popularity.desc is not working. Look into this later
     .then(function(response){
         return response.json()
     })
