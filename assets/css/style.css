@@ -1,0 +1,116 @@
+header {
+    border-bottom:solid 2px ;
+    
+}
+
+.row-search {
+    width: 365px;
+    padding: 0px;
+    margin: auto !important;
+}
+
+.row-C {
+    margin: auto !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.input-custom {
+    width: 100px;
+}
+
+.m-a {
+    margin: auto;
+}
+
+.top-bar {
+    background-color: rgb(85, 85, 85);
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
+.ms-0 {
+    margin: 0 auto;
+}
+
+.btn {
+    background-color: #3fca95;
+    margin: 0;
+    outline: none;
+    border:none;
+    color: rgb(19, 19, 19);
+    text-align-last:center;
+    cursor: pointer;
+    border-color: #3fca95;
+    border: solid #000000c7 ;
+    border-width: 2px;
+    font-size: 16px;
+    height: 35px;
+}
+
+.rounded-right {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.rounded-left {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.searchOptions {
+    text-align: center;
+    justify-content: center;
+}
+
+#searchQuery {
+    padding: 0;
+    margin: 0;
+    width: 170px;
+    height: 35px;
+    outline: none;
+    background-color: rgb(192, 192, 192);
+}
+
+#searchQuery:focus {
+    background-color: rgb(255, 255, 255);
+}
+
+#searchCriteria {
+    
+    position: relative;
+    bottom:-2px;
+    width: 110px;
+}
+
+#searchCriteria option {
+    text-align: center;
+}
+
+#genresDropdown {
+    width: 150px;
+}
+
+.top-bar-left {
+    justify-content: center;
+    text-align: center;
+}
+
+#searchButton {
+    position: relative;
+    padding: 5px;
+    bottom: -2px;
+}
+
+@media screen and (max-width: 525px) {
+    .top-bar-left {
+        margin-left: 170px;
+        margin-bottom: 10px;
+    }
+    
+    .top-bar-right {
+        margin-right:65px ;
+    }
+  }
