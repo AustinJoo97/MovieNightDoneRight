@@ -1,3 +1,4 @@
+let tmdbAPI = 'https://api.themoviedb.org/3/search/movie?api_key='
 let apiKey = 'f11af3c11ab7492603919de407bd7900';
 let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
@@ -16,7 +17,6 @@ function categoriesPopulation(){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
         for(let i = 0; i < data.genres.length; i++){
             let newGenre = document.createElement('option');
             newGenre.setAttribute("value", data.genres[i].id);
@@ -30,30 +30,48 @@ function retrieveMovies(event){
     event.preventDefault();
     let searchCriteriaChosen = this.childNodes[1].value;
     let searchQuery = this.childNodes[3].value;
+    let searchQueryArray;
+    let urlQuery = '';
 
     if(!searchQuery){
+        urlQuery= 'all';
+        getMoviesByTitle(urlQuery);
         return;
     }
 
-    // This returns for the selected value of the searchOptions' dropdown menu
-    console.log(this.childNodes[1].value);
-    // console.log(typeof searchCriteriaChosen);
-    if(searchCriteriaChosen === 'none'){
-
+    if(searchCriteriaChosen === 'allMovies' || searchCriteriaChosen === 'title'){
+        searchQueryArray = searchQuery.split(" ");
+        for(let i = 0; i < searchQueryArray.length; i++){
+            if(i === searchQueryArray.length-1){
+                urlQuery += `${searchQueryArray[i]}`
+            } else {
+                urlQuery += `${searchQueryArray[i]}+`
+            }
+        }
+        getMoviesByTitle(urlQuery);
     } else if(searchCriteriaChosen === 'actor'){
+
+
 
     } else if(searchCriteriaChosen === 'yearReleased'){
 
-    } else if(searchCriteriaChosen === 'title'){
+
 
     } else if(searchCriteriaChosen === 'rating'){
 
     }
-
-    // This returns the value within the input box
-    console.log(this.childNodes[3].value)
 }
 
+function getMoviesByTitle(queryString){
+    console.log(`THIS IS QUERY STRING: ${queryString}`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${queryString}&language=en-US&include_adult=true`)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data);
+    })
+}
 
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
