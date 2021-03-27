@@ -4,7 +4,8 @@ let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
 // User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
-let searchForMovies = document.getElementById('searchOptions')
+let searchForMovies = document.getElementById('searchOptions');
+let renderedMovies = document.getElementById('renderedMovies');
 
 
 function initializer(){
@@ -141,6 +142,37 @@ function getFullMovieDetails(movie){
     })
     .then(function(data){
         console.log(data);
+        let newMovieCard = document.createElement('div');
+        let newMovieImg = document.createElement('img');
+        newMovieImg.src = `${movieImgURL}${data.poster_path}`;
+        let newMovieTitle = document.createElement('h3');
+        newMovieTitle.textContent = data.original_title;
+        let newMovieYear = document.createElement('h4');
+        newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
+        let newMovieRating = document.createElement('h4');
+        // let movieCert;
+        // for(let i = 0; data.release_dates.results.length; i++){
+        //     if(data.release_dates.results[i].iso_3166_1 === 'US'){
+        //         movieCert = data.release_dates.results[i].release_dates[0].certification;
+        //     }
+        // }
+        // newMovieRating.textContent = `Rated ${movieCert}`;
+        let newMovieGenres = document.createElement('h5');
+        for(let i = 0; i < data.genres.length; i++){
+            if(i === data.genres.length-1){
+                newMovieGenres.textContent += `${data.genres[i].name}`
+            } else {
+                newMovieGenres.textContent += `${data.genres[i].name}, `
+            }
+        }
+        newMovieCard.appendChild(newMovieImg);
+        newMovieCard.appendChild(newMovieTitle);
+        newMovieCard.appendChild(newMovieYear);
+        newMovieCard.appendChild(newMovieRating);
+        newMovieCard.appendChild(newMovieGenres);
+        newMovieCard.style.width = '250px';
+        newMovieCard.style.height = '500px';
+        renderedMovies.appendChild(newMovieCard);
     })
 };
 
