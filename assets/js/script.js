@@ -69,9 +69,7 @@ function retrieveMovies(event){
             alert('Not a valid year! Please try again!')
         }
         return;
-    } else if(searchCriteriaChosen === 'rating'){
-        
-    }
+    } 
 }
 
 // This function will render the top rated movies on tmdb as a default list of movies
@@ -134,10 +132,10 @@ function getActorsFilmography(actorID){
     })
 }
 
-// This function will get the full details of all the movies that are returned in the above functions
+// This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
-    fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits`)
+    fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
         return response.json()
     })
