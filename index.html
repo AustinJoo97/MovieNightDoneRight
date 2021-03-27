@@ -12,21 +12,29 @@
 
 <body>
     <!-- We can use header as nav bar -->
-    <header>
-        <select id='genresDropdown'>
-            <option value='none' selected disabled hidden>Select a Genre</option>
-        </select>
-        <form id='searchOptions'>
-            <select id='searchCriteria' selected='Search by:'>
-                <option value='allMovies' selected>All Movies</option>
-                <option value='actor'>Actors</option>
-                <option value='yearReleased'>Year Released</option>
-                <option value='title'>Title</option>
-                <option value='rating'>Rating</option>
-            </select>
-            <input id='searchQuery'>
-            <button id='searchButton'>Search</button>
-        </form>
+    <header class="top-bar">
+        <nav class="row row-C">
+            <div class="top-bar-left m-a">
+                <select id='genresDropdown' class="btn rounded-left rounded-right" >
+                    <option value='none' selected disabled hidden>Select a Genre</option>
+                </select>
+            </div>
+            
+            <form id='searchOptions' class="top-bar-right">
+                <div class="row row-search">
+                    <select class="small-12 medium-3 btn rounded-left " id='searchCriteria' selected='Search by:'>
+                        <option value='allMovies' selected>All Movies</option>
+                        <option value='actor'>Actors</option>
+                        <option value='yearReleased'>Year Released</option>
+                        <option value='title'>Title</option>
+                        <option value='rating'>Rating</option>
+                    </select>
+                    <input class="mr-0" size="25"  id='searchQuery'>
+                    <button class="btn rounded-right ms-0" id='searchButton'>Search</button>
+                </div>
+
+            </form>
+        </nav>
     </header>
     <!-- Modal to be used to display movie info -->
     <div class="row">
@@ -47,9 +55,12 @@
             </button>
           </div>
         </div>
-      </div>
+    </div>
 
     <main>
+        <div class="container" id="results">
+            
+        </div>
     </main>
 
     <footer>
