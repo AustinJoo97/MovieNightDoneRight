@@ -49,14 +49,19 @@ function retrieveMovies(event){
             }
         }
         getMoviesByTitle(urlQuery);
+        return;
     } else if(searchCriteriaChosen === 'actor'){
 
 
 
     } else if(searchCriteriaChosen === 'yearReleased'){
-
-
-
+        if(Number(searchQuery)){
+            urlQuery = `${searchQuery}`;
+            getMoviesByYear(urlQuery);
+        } else {
+            alert('Not a valid year! Please try again!')
+        }
+        return;
     } else if(searchCriteriaChosen === 'rating'){
 
         
@@ -64,8 +69,20 @@ function retrieveMovies(event){
 }
 
 function getMoviesByTitle(queryString){
-    console.log(`THIS IS QUERY STRING: ${queryString}`)
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${queryString}&language=en-US&include_adult=true`)
+    // console.log(`THIS IS QUERY STRING: ${queryString}`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&query=${queryString}&language=en-US&include_adult=true`)
+    // Sort_by=popularity.desc is not working. Look into this later
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data);
+    })
+}
+
+function getMoviesByYear(queryNumAsString){
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&query=all&language=en-US&include_adult=true&primary_release_year=${queryNumAsString}`)
+    // Sort_by=popularity.desc is not working. Look into this later
     .then(function(response){
         return response.json()
     })
