@@ -77,6 +77,7 @@ function retrieveMovies(event){
 
 
 // These functions pertain to searches made regarding a movie's information (title, year released)
+    // This function will perform a search for all movies based on title/keyword then get each movie's full details
 function getMoviesByTitle(movieTitleString){
     // console.log(`THIS IS QUERY STRING: ${movieTitleString}`)
     fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true`)
@@ -88,7 +89,7 @@ function getMoviesByTitle(movieTitleString){
         data.results.forEach(getFullMovieDetails)
     })
 }
-
+    // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
     fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}`)
     .then(function(response){
@@ -101,6 +102,7 @@ function getMoviesByYear(movieReleaseYearString){
 
 
 // These functions pertain to searches made regarding a movie's cast and his/her name
+    // This function will take the name of an actor/actress searched, retrieve their ID, then pass it to the getActorsFilmography function
 function getMoviesByActors(actorNameString){
     fetch(`http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}`)
     .then(function(response){
@@ -110,7 +112,7 @@ function getMoviesByActors(actorNameString){
         getActorsFilmography(data.results[0].id)
     })
 }
-    // This function will take the actor's ID passed from the above function and return his/her full filmography
+// This function will take the actor's ID passed from the above function and return his/her full filmography
     // It will then take the ID of each film and pass it into the getFullMovieDetailsFunction
 function getActorsFilmography(actorID){
     fetch(`https://api.themoviedb.org/3/person/${actorID}/movie_credits?api_key=${apiKey}`)
@@ -123,6 +125,7 @@ function getActorsFilmography(actorID){
 }
 
 // This function will get the full details of all the movies that are returned in the above functions
+    // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits`)
     .then(function(response){
