@@ -35,8 +35,7 @@ function retrieveMovies(event){
 
     
     if(!searchQuery){
-        urlQuery= 'all';
-        getMoviesByTitle(urlQuery);
+        getTopRatedMovies();
         return;
     }
 
@@ -75,6 +74,17 @@ function retrieveMovies(event){
     }
 }
 
+// This function will render the top rated movies on tmdb as a default list of movies
+    // They will be rendered if the user searches without a query or upon initial page loads
+function getTopRatedMovies(){
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&sort_by=popularity.desc`)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        data.results.forEach(getFullMovieDetails)
+    })
+}
 
 // These functions pertain to searches made regarding a movie's information (title, year released)
     // This function will perform a search for all movies based on title/keyword then get each movie's full details
