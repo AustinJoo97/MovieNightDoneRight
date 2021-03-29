@@ -6,6 +6,7 @@ let searchQueries = '';
 let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
 let renderedMovies = document.getElementById('renderedMovies');
+let genres = {};
 
 
 function initializer(){
@@ -20,6 +21,7 @@ function categoriesPopulation(){
     })
     .then(function(data){
         for(let i = 0; i < data.genres.length; i++){
+            genres[data.genres[i].id] = data.genres[i].name;
             let newGenre = document.createElement('option');
             newGenre.setAttribute("value", data.genres[i].id);
             newGenre.textContent = data.genres[i].name;
@@ -156,7 +158,7 @@ function getFullMovieDetails(movie){
         let newMovieRating = document.createElement('h4');
         let movieCert;
         for(let i = 0; i < data.release_dates.results.length; i++){
-            console.log(data.release_dates.results[i].iso_3166_1);
+            // console.log(data.release_dates.results[i].iso_3166_1);
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
                 movieCert = data.release_dates.results[i].release_dates[0].certification;
             }
