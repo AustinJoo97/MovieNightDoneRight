@@ -104,6 +104,17 @@ header {
     bottom: -2px;
 }
 
+/* #renderedMovies{
+} */
+
+.movieCard{
+    display: inline-block;
+    width: 225px;
+    height: 600px;
+    border: 1px solid purple;
+    margin: 3px;
+}
+
 @media screen and (max-width: 525px) {
     .top-bar-left {
         margin-left: 170px;
