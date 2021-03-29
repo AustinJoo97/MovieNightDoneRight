@@ -109,10 +109,22 @@ header {
 
 .movieCard{
     display: inline-block;
-    width: 225px;
-    height: 600px;
+    width: 200px;
+    height: min-content;
     border: 1px solid purple;
     margin: 3px;
+    text-align: center;
+    /* white-space: nowrap; */
+}
+
+.column {
+    display: inline-block;
+   width: max-content;
+    height: min-content;
+}
+
+.renderedMovies {
+    margin: 1% 3% ;
 }
 
 @media screen and (max-width: 525px) {
