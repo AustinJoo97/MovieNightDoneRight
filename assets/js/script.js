@@ -10,6 +10,7 @@ let renderedMovies = document.getElementById('renderedMovies');
 
 function initializer(){
     categoriesPopulation();
+    getTopRatedMovies();
 }
 
 function categoriesPopulation(){
@@ -81,6 +82,7 @@ function getTopRatedMovies(){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -95,6 +97,7 @@ function getMoviesByTitle(movieTitleString){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -105,6 +108,7 @@ function getMoviesByYear(movieReleaseYearString){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -129,6 +133,7 @@ function getActorsFilmography(actorID){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.cast.forEach(getFullMovieDetails)
     })
 }
@@ -141,7 +146,6 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
         let newMovieCard = document.createElement('div');
         let newMovieImg = document.createElement('img');
         newMovieImg.src = `${movieImgURL}${data.poster_path}`;
@@ -150,13 +154,14 @@ function getFullMovieDetails(movie){
         let newMovieYear = document.createElement('h4');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
         let newMovieRating = document.createElement('h4');
-        // let movieCert;
-        // for(let i = 0; data.release_dates.results.length; i++){
-        //     if(data.release_dates.results[i].iso_3166_1 === 'US'){
-        //         movieCert = data.release_dates.results[i].release_dates[0].certification;
-        //     }
-        // }
-        // newMovieRating.textContent = `Rated ${movieCert}`;
+        let movieCert;
+        for(let i = 0; i < data.release_dates.results.length; i++){
+            console.log(data.release_dates.results[i].iso_3166_1);
+            if(data.release_dates.results[i].iso_3166_1 === 'US'){
+                movieCert = data.release_dates.results[i].release_dates[0].certification;
+            }
+        }
+        newMovieRating.textContent = `Rated ${movieCert}`;
         let newMovieGenres = document.createElement('h5');
         for(let i = 0; i < data.genres.length; i++){
             if(i === data.genres.length-1){
@@ -170,11 +175,18 @@ function getFullMovieDetails(movie){
         newMovieCard.appendChild(newMovieYear);
         newMovieCard.appendChild(newMovieRating);
         newMovieCard.appendChild(newMovieGenres);
-        newMovieCard.style.width = '250px';
-        newMovieCard.style.height = '500px';
+        newMovieCard.setAttribute('class', 'movieCard');
         renderedMovies.appendChild(newMovieCard);
     })
 };
+
+// This is a function that will clear all movie cards before rendering the next set to the DOM
+function removeRenderMovies(){
+    while(renderedMovies.firstChild){
+        renderedMovies.removeChild(renderedMovies.firstChild)
+    }
+    return;
+}
 
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
