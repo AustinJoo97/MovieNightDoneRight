@@ -143,7 +143,7 @@ function getActorsFilmography(actorID){
 // This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
-    let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR']
+    let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR', '']
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
         return response.json()
@@ -159,17 +159,18 @@ function getFullMovieDetails(movie){
         let newMovieRating = document.createElement('h4');
 
         for(let i = 0; i < data.release_dates.results.length; i++){
-            // console.log(data.release_dates.results[i].iso_3166_1);
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
+                console.log(data.original_title, data.release_dates.results);
                 if(noRating.includes(data.release_dates.results[i].release_dates[0].certification)){
                     newMovieRating.textContent = `Unrated`
+                    continue;
                 } else {
                     newMovieRating.textContent = `Rated ${data.release_dates.results[i].release_dates[0].certification}`;
                 }
             } 
-            // else if(i === data.release_dates.results.length-1 && data.release_dates.results[i].iso_3166_1 !== 'US'){
-            //         newMovieRating.textContent = `Unrated`
-            // }
+        }
+        if(newMovieRating.textContent === '' || newMovieRating.textContent === undefined){
+            newMovieRating.textContent = `Unrated`;
         }
         let newMovieGenres = document.createElement('h5');
         for(let i = 0; i < data.genres.length; i++){
