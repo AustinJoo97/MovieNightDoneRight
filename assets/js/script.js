@@ -4,11 +4,14 @@ let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
 // User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
-let searchForMovies = document.getElementById('searchOptions')
+let searchForMovies = document.getElementById('searchOptions');
+let renderedMovies = document.getElementById('renderedMovies');
+let genres = {};
 
 
 function initializer(){
     categoriesPopulation();
+    getTopRatedMovies();
 }
 
 function categoriesPopulation(){
@@ -18,6 +21,7 @@ function categoriesPopulation(){
     })
     .then(function(data){
         for(let i = 0; i < data.genres.length; i++){
+            genres[data.genres[i].id] = data.genres[i].name;
             let newGenre = document.createElement('option');
             newGenre.setAttribute("value", data.genres[i].id);
             newGenre.textContent = data.genres[i].name;
@@ -80,6 +84,7 @@ function getTopRatedMovies(){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -94,6 +99,7 @@ function getMoviesByTitle(movieTitleString){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -104,6 +110,7 @@ function getMoviesByYear(movieReleaseYearString){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.results.forEach(getFullMovieDetails)
     })
 }
@@ -128,6 +135,7 @@ function getActorsFilmography(actorID){
         return response.json()
     })
     .then(function(data){
+        removeRenderMovies();
         data.cast.forEach(getFullMovieDetails)
     })
 }
@@ -135,14 +143,60 @@ function getActorsFilmography(actorID){
 // This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
+    let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR', '']
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
+        let newMovieCard = document.createElement('div');
+        let newMovieImg = document.createElement('img');
+        newMovieImg.src = `${movieImgURL}${data.poster_path}`;
+        let newMovieTitle = document.createElement('h3');
+        newMovieTitle.textContent = data.original_title;
+        let newMovieYear = document.createElement('h4');
+        newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
+        let newMovieRating = document.createElement('h4');
+
+        for(let i = 0; i < data.release_dates.results.length; i++){
+            if(data.release_dates.results[i].iso_3166_1 === 'US'){
+                console.log(data.original_title, data.release_dates.results);
+                if(noRating.includes(data.release_dates.results[i].release_dates[0].certification)){
+                    newMovieRating.textContent = `Unrated`
+                    continue;
+                } else {
+                    newMovieRating.textContent = `Rated ${data.release_dates.results[i].release_dates[0].certification}`;
+                }
+            } 
+        }
+        if(newMovieRating.textContent === '' || newMovieRating.textContent === undefined){
+            newMovieRating.textContent = `Unrated`;
+        }
+        let newMovieGenres = document.createElement('h5');
+        for(let i = 0; i < data.genres.length; i++){
+            if(i === data.genres.length-1){
+                newMovieGenres.textContent += `${data.genres[i].name}`
+            } else {
+                newMovieGenres.textContent += `${data.genres[i].name}, `
+            }
+        }
+        newMovieCard.appendChild(newMovieImg);
+        newMovieCard.appendChild(newMovieTitle);
+        newMovieCard.appendChild(newMovieYear);
+        newMovieCard.appendChild(newMovieRating);
+        newMovieCard.appendChild(newMovieGenres);
+        newMovieCard.setAttribute('class', 'movieCard');
+        renderedMovies.appendChild(newMovieCard);
     })
 };
+
+// This is a function that will clear all movie cards before rendering the next set to the DOM
+function removeRenderMovies(){
+    while(renderedMovies.firstChild){
+        renderedMovies.removeChild(renderedMovies.firstChild)
+    }
+    return;
+}
 
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
