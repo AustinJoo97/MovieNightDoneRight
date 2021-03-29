@@ -2,6 +2,8 @@ let tmdbAPI = 'https://api.themoviedb.org/3/search/movie?api_key='
 let apiKey = 'f11af3c11ab7492603919de407bd7900';
 let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
+let foodAPI = 'https://api.documenu.com/v2/restaurants/zip_code/'
+let foodAPIkey = '?key=c5752c8e949ff34a04ffeb67f70d2988&size=10';
 // User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
