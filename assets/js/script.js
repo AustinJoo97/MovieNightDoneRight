@@ -16,7 +16,7 @@ let getRestBtn = document.getElementById('getRestBtn')
 
 function initializer(){
     categoriesPopulation();
-    getTopRatedMovies();
+    getMoviesNowPlaying();
 }
 
 function categoriesPopulation(){
@@ -83,8 +83,8 @@ function retrieveMovies(event){
 
 // This function will render the top rated movies on tmdb as a default list of movies
     // They will be rendered if the user searches without a query or upon initial page loads
-function getTopRatedMovies(){
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&sort_by=popularity.desc`)
+function getMoviesNowPlaying(){
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&region=US`)
     .then(function(response){
         return response.json()
     })
