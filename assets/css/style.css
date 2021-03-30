@@ -111,12 +111,12 @@ body {
 /* #renderedMovies{
 } */
 
-.movieCard{
-    display: inline-block;
-    width: 155px;
+.movieCard {
+    
+    width: 210px;
     height: min-content;
     border: 2px solid #3fca95;
-    margin: 5px ;
+    margin: 10px auto;
     text-align: center;
     background-color: rgb(85, 85, 85);
     /* white-space: nowrap; */
@@ -135,6 +135,7 @@ body {
     display: inline-block;
    width: fit-content;
     height: min-content;
+    justify-content: center;
 }
 
 .renderedMovies {
