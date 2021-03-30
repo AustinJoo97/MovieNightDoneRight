@@ -16,7 +16,7 @@
         <nav class="row row-C">
             <div class="top-bar-left m-a">
                 <select id='genresDropdown' class="btn rounded-left rounded-right" >
-                    <option value='none' selected disabled hidden>Select a Genre</option>
+                    <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
                 </select>
             </div>
             
@@ -35,7 +35,17 @@
             </form>
         </nav>
     </header>
-    <!-- Modal to be used to display movie info -->
+   
+
+    <div class="row  text-center" id=criteriaInput>
+        <h2>criteriaInput Placeholder</h2>
+        <hr>
+    </div>
+    <main class="row small-up-2 medium-up-3 large-up-5" id="renderedMovies">
+
+    </main>
+
+    <footer> <!-- Modal to be used to display movie info -->
     <div class="row">
         <div class="columns">
           <p><a data-open="exampleModal1">Movie Modal</a></p>
@@ -55,13 +65,7 @@
             </button>
           </div>
         </div>
-    </div>
-
-    <main class="row small-up-2 medium-up-3 large-up-5" id="renderedMovies">
-
-    </main>
-
-    <footer>
+    </div>  
     </footer>
 
 
