@@ -3,12 +3,13 @@ let apiKey = 'f11af3c11ab7492603919de407bd7900';
 let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
 let foodAPI = 'https://api.documenu.com/v2/restaurants/zip_code/'
-let foodAPIkey = '?key=c5752c8e949ff34a04ffeb67f70d2988&size=10';
+let foodAPIkey = '?key=c5752c8e949ff34a04ffeb67f70d2988&size=1';
 // User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
 let renderedMovies = document.getElementById('renderedMovies');
 let genres = {};
+let restaurantContainer = document.getElementById('restaurants')
 
 
 function initializer(){
@@ -202,3 +203,31 @@ function removeRenderMovies(){
 
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
+
+// This function will take the users zipcode and return a `random` restaurant located within the users zipcode. Currenly just a skeleton, need to add functionality.
+function getRestaurantByZipcode(){
+    let zipcode = 20706
+
+    fetch(`https://api.documenu.com/v2/restaurants/zip_code/${zipcode}${foodAPIkey}`)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function (data) {
+        console.log(data.data)
+        let restInfo = data.data
+        for (let i = 0; i < restInfo.length; i++){
+            let restaurantName = document.createElement('h6')
+            let restaurantPhone = document.createElement('p')
+            let restaurantAddress = document.createElement('p')
+            restaurantName.textContent = restInfo[i].restaurant_name;
+            restaurantPhone.textContent = restInfo[i].restaurant_phone;
+            restaurantAddress.textContent = restInfo[i].address.formatted;
+            restaurantContainer.appendChild(restaurantName)
+            restaurantContainer.appendChild(restaurantPhone)
+            restaurantContainer.appendChild(restaurantAddress)
+        }
+
+    })
+}
+
+getRestaurantByZipcode()
