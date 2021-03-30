@@ -151,14 +151,16 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
+        let newMovieCell = document.createElement('div');
         let newMovieCard = document.createElement('div');
         let newMovieImg = document.createElement('img');
+        let newMovieCardSection = document.createElement('div')
         newMovieImg.src = `${movieImgURL}${data.poster_path}`;
-        let newMovieTitle = document.createElement('h3');
+        let newMovieTitle = document.createElement('h5');
         newMovieTitle.textContent = data.original_title;
-        let newMovieYear = document.createElement('h4');
+        let newMovieYear = document.createElement('h6');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
-        let newMovieRating = document.createElement('h4');
+        let newMovieRating = document.createElement('h6');
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
@@ -174,7 +176,7 @@ function getFullMovieDetails(movie){
         if(newMovieRating.textContent === '' || newMovieRating.textContent === undefined){
             newMovieRating.textContent = `Unrated`;
         }
-        let newMovieGenres = document.createElement('h5');
+        let newMovieGenres = document.createElement('h6');
         for(let i = 0; i < data.genres.length; i++){
             if(i === data.genres.length-1){
                 newMovieGenres.textContent += `${data.genres[i].name}`
@@ -183,12 +185,16 @@ function getFullMovieDetails(movie){
             }
         }
         newMovieCard.appendChild(newMovieImg);
-        newMovieCard.appendChild(newMovieTitle);
-        newMovieCard.appendChild(newMovieYear);
-        newMovieCard.appendChild(newMovieRating);
-        newMovieCard.appendChild(newMovieGenres);
+        newMovieCard.appendChild(newMovieCardSection);
         newMovieCard.setAttribute('class', 'movieCard');
-        renderedMovies.appendChild(newMovieCard);
+        newMovieCardSection.appendChild(newMovieTitle);
+        newMovieCardSection.appendChild(newMovieYear);
+        newMovieCardSection.appendChild(newMovieRating);
+        newMovieCardSection.appendChild(newMovieGenres);
+        newMovieCardSection.setAttribute('class', 'card-section')
+        newMovieCell.appendChild(newMovieCard);
+        newMovieCell.setAttribute('class','column');
+        renderedMovies.appendChild(newMovieCell);
     })
 };
 
