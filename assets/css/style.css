@@ -1,8 +1,12 @@
 header {
     border-bottom:solid 2px ;
+    background-color: rgb(173, 35, 35);
     
 }
 
+body {
+    background-color: rgb(141, 141, 141);
+}
 .row-search {
     width: 365px;
     padding: 0px;
@@ -109,17 +113,27 @@ header {
 
 .movieCard{
     display: inline-block;
-    width: 200px;
+    width: 150px;
     height: min-content;
-    border: 1px solid purple;
+    border: 2px solid #3fca95;
     margin: 3px;
     text-align: center;
+    background-color: rgb(85, 85, 85);
     /* white-space: nowrap; */
+}
+
+.card-section {
+    color: rgb(221, 221, 221);
+}
+
+.card-section h5 {
+    background-color: rgba(17, 17, 17, 0.87);
+    margin-top: 2px;
 }
 
 .column {
     display: inline-block;
-   width: max-content;
+   width: fit-content;
     height: min-content;
 }
 
