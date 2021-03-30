@@ -16,7 +16,7 @@
         <nav class="row row-C">
             <div class="top-bar-left m-a">
                 <select id='genresDropdown' class="btn rounded-left rounded-right" >
-                    <option value='none' selected disabled hidden>Select a Genre</option>
+                    <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
                 </select>
             </div>
             
@@ -35,6 +35,17 @@
             </form>
         </nav>
     </header>
+   
+
+    <div class="row  text-center" id=criteriaInput>
+        <h2>Movie Night!</h2>
+        <hr>
+    </div>
+    <main class="row small-up-2 large-up-4" id="renderedMovies">
+
+    </main>
+
+    <footer>
     <!-- Modal to be used to display movie info -->
     <div class="row">
         <div class="columns">
@@ -56,17 +67,11 @@
             </button>
           </div>
         </div>
-    </div>
-
-    <main class="row small-up-2 medium-up-3 large-up-5" id="renderedMovies">
-
-    </main>
-
-    <footer>
+    </div>  
     </footer>
 
 
-    <script src="assets/js/script.js"></script>
+    
     <!-- 2.1.4 Jquery to match foundation -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!--  CDN for foundation -->
@@ -75,6 +80,7 @@
     <script>
         $(document).foundation();
     </script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
