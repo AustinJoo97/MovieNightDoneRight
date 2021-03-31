@@ -322,3 +322,5 @@ function getRestaurantByZipcode(){
 getRestBtn.addEventListener("click", getRestaurantByZipcode)
 
 
+// Added functionality to account for selected genres when searching for top rated movies (by clicking search with empty search query)
+// When a genre is selected, have all featured movies of the genre render to the DOM instead of only filtering nowPlaying movies
