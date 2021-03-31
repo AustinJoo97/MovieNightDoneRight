@@ -14,6 +14,7 @@ let fetchAPI;
 let restaurantContainer = document.getElementById('restaurants')
 let userZip = document.getElementById('userZip')
 let getRestBtn = document.getElementById('getRestBtn')
+let modalMovieTitle = document.getElementById('modalMovieTitle')
 
 
 function initializer(){
@@ -112,52 +113,58 @@ function getTopRatedMovies(){
 // These functions pertain to searches made regarding a movie's information (title, year released)
     // This function will perform a search for all movies based on title/keyword then get each movie's full details
 function getMoviesByTitle(movieTitleString){
-    if(genreID){
-        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&with_genres${genreID}`;
-    } else {
-        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US`
+    for(let i = 1; i < 20; i++){
+        if(genreID){
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&with_genres${genreID}&page=${i}`;
+        } else {
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&page=${i}`
+        }
+        fetch(fetchAPI)
+        // SORT_BY=POPULARITY.DESC IS NOT WORKING AS INTENDED. LOOK INTO THIS LATER
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            removeRenderMovies();
+            data.results.forEach(getFullMovieDetails)
+        })
     }
-    fetch(fetchAPI)
-    // SORT_BY=POPULARITY.DESC IS NOT WORKING AS INTENDED. LOOK INTO THIS LATER
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        removeRenderMovies();
-        data.results.forEach(getFullMovieDetails)
-    })
 }
     // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
-    if(genreID){
-        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres${genreID}&region=US`;
-    } else {
-        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US`
+    for(let i = 1; i < 20; i++){
+        if(genreID){
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres${genreID}&region=US`;
+        } else {
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US`
+        }
+        fetch(fetchAPI)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            removeRenderMovies();
+            data.results.forEach(getFullMovieDetails)
+        })
     }
-    fetch(fetchAPI)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        removeRenderMovies();
-        data.results.forEach(getFullMovieDetails)
-    })
 }
 
     // This function will search all movies based on the genre selected
 function getMoviesByGenre(event){
     genreID = event.target.value;
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&with_genres${genreID}&region=US`)
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        removeRenderMovies();
-        data.results.forEach(getFullMovieDetails)
-    })
-    .catch(function(error){
-        console.log(error);
-    })
+    for(let i = 1; i < 20; i++){
+        fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres${genreID}&region=US&page=${i}`)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            removeRenderMovies();
+            data.results.forEach(getFullMovieDetails)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
 }
 
 // These functions pertain to searches made regarding a movie's cast and his/her name
