@@ -212,6 +212,7 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
+        // console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -241,9 +242,18 @@ function getFullMovieDetails(movie){
         let newMovieYear = document.createElement('h6');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
         let newMovieRating = document.createElement('h6');
-        let newMovieID = document.createElement('p');
-        newMovieID.textContent = movie.id;
+        let newMovieID = document.createElement('span');
+        newMovieID.textContent = data.id;
+        let newMovieCast = document.createElement('span');
+        newMovieCast.textContent = data.credits.cast;
+        let newMovieSynopsis = document.createElement('span');
+        newMovieSynopsis.textContent = data.overview;
+        let newMovieReview = document.createElement('span');
+        newMovieReview.textContent = data.vote_average;
         newMovieID.style.display = 'hidden';
+        newMovieCast.style.display = 'hidden';
+        newMovieSynopsis.style.display = 'hidden';
+        newMovieReview.style.display = 'hidden';
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
@@ -275,6 +285,9 @@ function getFullMovieDetails(movie){
         newMovieCardSection.appendChild(newMovieRating);
         newMovieCardSection.appendChild(newMovieGenres);
         newMovieCardSection.appendChild(newMovieID);
+        newMovieCardSection.appendChild(newMovieCast);
+        newMovieCardSection.appendChild(newMovieSynopsis);
+        newMovieCardSection.appendChild(newMovieReview);
         newMovieCardSection.setAttribute('class', 'card-section')
         newMovieCell.appendChild(newMovieCard);
         newMovieCell.setAttribute('class','column');
@@ -303,8 +316,14 @@ function movieCardClickFunctions(){
 }
 
 function upDateModal(movieCard) {
-    // console.log(movieCard.childNodes[1].childNodes[0].textContent);
-    document.getElementById('modalMovieTitle').textContent += movieCard.childNodes[1].childNodes[0].textContent;
+    console.log(movieCard);
+    document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
+    document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
+    document.getElementById('modalMovieOverview').innerHTML = `<b>Synopsis: </b>${movieCard.childNodes[1].childNodes[6].textContent}`;
+    document.getElementById('modalMovieRating').innerHTML = `<b>MPAA ${movieCard.childNodes[1].childNodes[2].textContent}</b>`;
+    document.getElementById('modalMovieYear').innerHTML = `<b>${movieCard.childNodes[1].childNodes[1].textContent}</b>`;
+    document.getElementById('modalMovieReview').innerHTML = `<b>Viewer Score: </b>${movieCard.childNodes[1].childNodes[7].textContent}/10`
+
 }
 
 function saveMovieToLocal(movieCard){
