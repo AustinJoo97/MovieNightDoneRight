@@ -241,6 +241,9 @@ function getFullMovieDetails(movie){
         let newMovieYear = document.createElement('h6');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
         let newMovieRating = document.createElement('h6');
+        let newMovieID = document.createElement('p');
+        newMovieID.textContent = movie.id;
+        newMovieID.style.display = 'hidden';
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
@@ -271,18 +274,15 @@ function getFullMovieDetails(movie){
         newMovieCardSection.appendChild(newMovieYear);
         newMovieCardSection.appendChild(newMovieRating);
         newMovieCardSection.appendChild(newMovieGenres);
+        newMovieCardSection.appendChild(newMovieID);
         newMovieCardSection.setAttribute('class', 'card-section')
         newMovieCell.appendChild(newMovieCard);
         newMovieCell.setAttribute('class','column');
         renderedMovies.appendChild(newMovieCell);
-        newMovieCard.addEventListener("click", upDateModal)
+        newMovieCard.addEventListener("click", movieCardClickFunctions)
         //if img throws an error the src will change to the new placeholder 
         newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x450'")
 
-        function upDateModal() {
-            modalMovieTitle.textContent += newMovieTitle.textContent
-            
-        }
     })
     .catch(function(error){
         console.log(error);
@@ -295,6 +295,36 @@ function removeRenderMovies(){
         renderedMovies.removeChild(renderedMovies.firstChild)
     }
     return;
+}
+
+function movieCardClickFunctions(){
+    upDateModal(this);
+    saveMovieToLocal(this);
+}
+
+function upDateModal(movieCard) {
+    // console.log(movieCard.childNodes[1].childNodes[0].textContent);
+    document.getElementById('modalMovieTitle').textContent += movieCard.childNodes[1].childNodes[0].textContent;
+}
+
+function saveMovieToLocal(movieCard){
+    if(!localStorage.getItem('recentMovies')){
+        localStorage.setItem('recentMovies', JSON.stringify([]));
+    }
+    let recentMovies = JSON.parse(localStorage.getItem('recentMovies'));
+    let movieToSave = {
+        title: movieCard.childNodes[1].childNodes[0].textContent,
+        id: Number(movieCard.childNodes[1].childNodes[4].textContent)
+    }
+    for(let i = 0; i < recentMovies.length; i++){
+        if(movieToSave.id === recentMovies[i].id){
+            recentMovies.splice(i, 1);
+            break;
+        }
+    }
+    recentMovies.unshift(movieToSave);
+    console.log(recentMovies);
+    localStorage.setItem('recentMovies', JSON.stringify(recentMovies));
 }
 
 initializer();
