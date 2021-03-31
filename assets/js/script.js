@@ -264,6 +264,7 @@ function getFullMovieDetails(movie){
 
         function upDateModal() {
             modalMovieTitle.textContent += newMovieTitle.textContent
+            
         }
     })
     .catch(function(error){
