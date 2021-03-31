@@ -12,6 +12,7 @@ let genres = {};
 let restaurantContainer = document.getElementById('restaurants')
 let userZip = document.getElementById('userZip')
 let getRestBtn = document.getElementById('getRestBtn')
+let modalMovieTitle = document.getElementById('modalMovieTitle')
 
 
 function initializer(){
@@ -191,7 +192,13 @@ function getFullMovieDetails(movie){
         newMovieCard.appendChild(newMovieRating);
         newMovieCard.appendChild(newMovieGenres);
         newMovieCard.setAttribute('class', 'movieCard');
+        newMovieCard.setAttribute('data-open', 'exampleModal1')
         renderedMovies.appendChild(newMovieCard);
+        newMovieCard.addEventListener("click", updateModal)
+
+        function updateModal() {
+            console.log(modalMovieTitle)
+        }
     })
 };
 
