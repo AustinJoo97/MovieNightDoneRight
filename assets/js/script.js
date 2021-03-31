@@ -212,7 +212,7 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
-        // console.log(data);
+        console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -250,10 +250,10 @@ function getFullMovieDetails(movie){
         newMovieSynopsis.textContent = data.overview;
         let newMovieReview = document.createElement('span');
         newMovieReview.textContent = data.vote_average;
-        newMovieID.style.display = 'hidden';
-        newMovieCast.style.display = 'hidden';
-        newMovieSynopsis.style.display = 'hidden';
-        newMovieReview.style.display = 'hidden';
+        newMovieID.style.display = 'none';
+        newMovieCast.style.display = 'none';
+        newMovieSynopsis.style.display = 'none';
+        newMovieReview.style.display = 'none';
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
@@ -316,7 +316,6 @@ function movieCardClickFunctions(){
 }
 
 function upDateModal(movieCard) {
-    console.log(movieCard);
     document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
     document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
     document.getElementById('modalMovieOverview').innerHTML = `<b>Synopsis: </b>${movieCard.childNodes[1].childNodes[6].textContent}`;
