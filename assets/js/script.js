@@ -212,6 +212,7 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
+        console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -241,6 +242,18 @@ function getFullMovieDetails(movie){
         let newMovieYear = document.createElement('h6');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
         let newMovieRating = document.createElement('h6');
+        let newMovieID = document.createElement('span');
+        newMovieID.textContent = data.id;
+        let newMovieCast = document.createElement('span');
+        newMovieCast.textContent = data.credits.cast;
+        let newMovieSynopsis = document.createElement('span');
+        newMovieSynopsis.textContent = data.overview;
+        let newMovieReview = document.createElement('span');
+        newMovieReview.textContent = data.vote_average;
+        newMovieID.style.display = 'none';
+        newMovieCast.style.display = 'none';
+        newMovieSynopsis.style.display = 'none';
+        newMovieReview.style.display = 'none';
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
@@ -271,18 +284,18 @@ function getFullMovieDetails(movie){
         newMovieCardSection.appendChild(newMovieYear);
         newMovieCardSection.appendChild(newMovieRating);
         newMovieCardSection.appendChild(newMovieGenres);
+        newMovieCardSection.appendChild(newMovieID);
+        newMovieCardSection.appendChild(newMovieCast);
+        newMovieCardSection.appendChild(newMovieSynopsis);
+        newMovieCardSection.appendChild(newMovieReview);
         newMovieCardSection.setAttribute('class', 'card-section')
         newMovieCell.appendChild(newMovieCard);
         newMovieCell.setAttribute('class','column');
         renderedMovies.appendChild(newMovieCell);
-        newMovieCard.addEventListener("click", upDateModal)
+        newMovieCard.addEventListener("click", movieCardClickFunctions)
         //if img throws an error the src will change to the new placeholder 
         newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x450'")
 
-        function upDateModal() {
-            modalMovieTitle.textContent += newMovieTitle.textContent
-            
-        }
     })
     .catch(function(error){
         console.log(error);
@@ -295,6 +308,41 @@ function removeRenderMovies(){
         renderedMovies.removeChild(renderedMovies.firstChild)
     }
     return;
+}
+
+function movieCardClickFunctions(){
+    upDateModal(this);
+    saveMovieToLocal(this);
+}
+
+function upDateModal(movieCard) {
+    document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
+    document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
+    document.getElementById('modalMovieOverview').innerHTML = `<b>Synopsis: </b>${movieCard.childNodes[1].childNodes[6].textContent}`;
+    document.getElementById('modalMovieRating').innerHTML = `<b>MPAA ${movieCard.childNodes[1].childNodes[2].textContent}</b>`;
+    document.getElementById('modalMovieYear').innerHTML = `<b>${movieCard.childNodes[1].childNodes[1].textContent}</b>`;
+    document.getElementById('modalMovieReview').innerHTML = `<b>Viewer Score: </b>${movieCard.childNodes[1].childNodes[7].textContent}/10`
+
+}
+
+function saveMovieToLocal(movieCard){
+    if(!localStorage.getItem('recentMovies')){
+        localStorage.setItem('recentMovies', JSON.stringify([]));
+    }
+    let recentMovies = JSON.parse(localStorage.getItem('recentMovies'));
+    let movieToSave = {
+        title: movieCard.childNodes[1].childNodes[0].textContent,
+        id: Number(movieCard.childNodes[1].childNodes[4].textContent)
+    }
+    for(let i = 0; i < recentMovies.length; i++){
+        if(movieToSave.id === recentMovies[i].id){
+            recentMovies.splice(i, 1);
+            break;
+        }
+    }
+    recentMovies.unshift(movieToSave);
+    console.log(recentMovies);
+    localStorage.setItem('recentMovies', JSON.stringify(recentMovies));
 }
 
 initializer();
