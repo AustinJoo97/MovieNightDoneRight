@@ -250,6 +250,7 @@ function getFullMovieDetails(movie){
         newMovieCard.appendChild(newMovieImg);
         newMovieCard.appendChild(newMovieCardSection);
         newMovieCard.setAttribute('class', 'movieCard');
+        newMovieCard.setAttribute('data-open', 'exampleModal1')
         newMovieCardSection.appendChild(newMovieTitle);
         newMovieCardSection.appendChild(newMovieYear);
         newMovieCardSection.appendChild(newMovieRating);
