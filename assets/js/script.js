@@ -100,7 +100,12 @@ function getMoviesNowPlaying(){
 // This function will render the top movies on tmdb
     // They will be rendered if the user searches without a query or upon initial page loads
 function getTopRatedMovies(){
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1&region=US`)
+    if(genreID){
+        fetchAPI = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1&region=US&with_genres=${genreID}`
+    } else {
+        fetchAPI = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1&region=US`
+    }
+    fetch(fetchAPI)
     .then(function(response){
         return response.json()
     })
@@ -115,7 +120,7 @@ function getTopRatedMovies(){
 function getMoviesByTitle(movieTitleString){
     for(let i = 1; i < 20; i++){
         if(genreID){
-            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&with_genres${genreID}&page=${i}`;
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&with_genres=${genreID}&page=${i}`;
         } else {
             fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&page=${i}`
         }
@@ -132,11 +137,12 @@ function getMoviesByTitle(movieTitleString){
 }
     // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
+    // console.log('this is movie release year: ' + movieReleaseYearString);
     for(let i = 1; i < 20; i++){
         if(genreID){
-            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres${genreID}&region=US`;
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres=${genreID}&region=US&page=${i}`;
         } else {
-            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US`
+            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&page=${i}`
         }
         fetch(fetchAPI)
         .then(function(response){
@@ -146,6 +152,9 @@ function getMoviesByYear(movieReleaseYearString){
             removeRenderMovies();
             data.results.forEach(getFullMovieDetails)
         })
+        .catch(function(error){
+            console.log(error)
+        })
     }
 }
 
@@ -153,7 +162,8 @@ function getMoviesByYear(movieReleaseYearString){
 function getMoviesByGenre(event){
     genreID = event.target.value;
     for(let i = 1; i < 20; i++){
-        fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres${genreID}&region=US&page=${i}`)
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres=${genreID}&region=US&page=${i}`)
+        // fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres${genreID}&region=US&page=${i}`)
         .then(function(response){
             return response.json()
         })
@@ -217,7 +227,7 @@ function getFullMovieDetails(movie){
         let newMovieCell = document.createElement('div');
         let newMovieCard = document.createElement('div');
         let newMovieImg = document.createElement('img');
-        let newMovieCardSection = document.createElement('div')
+        let newMovieCardSection = document.createElement('div');
         newMovieImg.src = `${movieImgURL}${data.poster_path}`;
         let newMovieTitle = document.createElement('h5');
         newMovieTitle.textContent = data.original_title;
@@ -310,3 +320,5 @@ function getRestaurantByZipcode(){
 }
 
 getRestBtn.addEventListener("click", getRestaurantByZipcode)
+
+
