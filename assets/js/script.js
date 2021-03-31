@@ -14,6 +14,7 @@ let fetchAPI;
 let restaurantContainer = document.getElementById('restaurants')
 let userZip = document.getElementById('userZip')
 let getRestBtn = document.getElementById('getRestBtn')
+let modalMovieTitle = document.getElementById('modalMovieTitle')
 
 
 function initializer(){
