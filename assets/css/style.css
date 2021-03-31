@@ -1,5 +1,5 @@
 header {
-    border-bottom:solid 2px ;
+    box-shadow: 0 0 20px black;
 }
 
 body {
@@ -29,7 +29,7 @@ body {
 
 .top-bar {
     background-color: #292b2c;
-    padding: 2%;
+    padding: 1%;
 }
 
 .mr-0 {
@@ -41,18 +41,23 @@ body {
 }
 
 .btn {
-    background-color: #3fca95;
+    background-color: #32946e;
     margin: 0;
     outline: none;
     border:none;
-    color: rgb(19, 19, 19);
+    color: rgb(255, 255, 255);
     text-align-last:center;
     cursor: pointer;
-    border-color: #3fca95;
+    /* border-color: #3fca95; */
     /* border: solid #000000c7 ; */
     border-width: 2px;
     font-size: 16px;
     height: 32px;
+}
+
+.btn:hover {
+    background-color: #4be7ab;
+    color: rgb(0, 0, 0);
 }
 
 .rounded-right {
@@ -85,7 +90,7 @@ body {
 
 #searchCriteria {
     position: relative;
-    bottom:-2px;
+    bottom:-1px;
     width: 110px;
 }
 
@@ -105,14 +110,13 @@ body {
 #searchButton {
     position: relative;
     padding: 5px;
-    bottom: -2px;
+    bottom: -1px;
 }
 
 /* #renderedMovies{
 } */
 
 .movieCard {
-    
     width: 210px;
     height: min-content;
     border: 2px solid #3fca95;
@@ -143,15 +147,16 @@ body {
 }
 
 #criteriaInput {
-    margin-top: 15px;
+    margin-top: 40px;
     color: rgb(202, 202, 202);
     border-color:#3fca95 ;
 }
 
 #criteriaInput hr {
-    border-color:#3fca95 ;
+    border-color:#32946e ;
 }
-@media screen and (max-width: 525px) {
+
+@media screen and (max-width: 535px) {
     .top-bar-left {
         margin-left: 170px;
         margin-bottom: 10px;
@@ -160,4 +165,26 @@ body {
     .top-bar-right {
         margin-right:65px ;
     }
-  }
+}
+
+@media screen and (max-width: 480px) {
+    .top-bar-left {
+        margin-left: 0px;
+    }
+
+    .top-bar-right {
+        margin-right: 0px ;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .movieCard {
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .movieCard {
+        width: 160px;
+    }
+}
