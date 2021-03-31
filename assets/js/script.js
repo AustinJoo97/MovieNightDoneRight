@@ -9,6 +9,8 @@ let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
 let renderedMovies = document.getElementById('renderedMovies');
 let genres = {};
+let genreID;
+let fetchAPI;
 let restaurantContainer = document.getElementById('restaurants')
 let userZip = document.getElementById('userZip')
 let getRestBtn = document.getElementById('getRestBtn')
@@ -16,11 +18,11 @@ let modalMovieTitle = document.getElementById('modalMovieTitle')
 
 
 function initializer(){
-    categoriesPopulation();
-    getTopRatedMovies();
+    genresPopulation();
+    getMoviesNowPlaying();
 }
 
-function categoriesPopulation(){
+function genresPopulation(){
     fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`)
     .then(function(response){
         return response.json()
@@ -49,6 +51,7 @@ function retrieveMovies(event){
         return;
     }
 
+    this.childNodes[1].childNodes[3].value = '';
     if(searchCriteriaChosen === 'allMovies' || searchCriteriaChosen === 'title'){
         searchQueryArray = searchQuery.split(" ");
         for(let i = 0; i < searchQueryArray.length; i++){
@@ -82,10 +85,22 @@ function retrieveMovies(event){
     } 
 }
 
-// This function will render the top rated movies on tmdb as a default list of movies
+// This function will render the currently playing/newly released movies on tmdb as a default list of movies
+function getMoviesNowPlaying(){
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&region=US`)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        removeRenderMovies();
+        data.results.forEach(getFullMovieDetails)
+    })
+}
+
+// This function will render the top movies on tmdb
     // They will be rendered if the user searches without a query or upon initial page loads
 function getTopRatedMovies(){
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&sort_by=popularity.desc`)
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1&region=US`)
     .then(function(response){
         return response.json()
     })
@@ -98,9 +113,13 @@ function getTopRatedMovies(){
 // These functions pertain to searches made regarding a movie's information (title, year released)
     // This function will perform a search for all movies based on title/keyword then get each movie's full details
 function getMoviesByTitle(movieTitleString){
-    // console.log(`THIS IS QUERY STRING: ${movieTitleString}`)
-    fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true`)
-    // Sort_by=popularity.desc is not working. Look into this later
+    if(genreID){
+        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US&with_genres${genreID}`;
+    } else {
+        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=${movieTitleString}&include_adult=true&region=US`
+    }
+    fetch(fetchAPI)
+    // SORT_BY=POPULARITY.DESC IS NOT WORKING AS INTENDED. LOOK INTO THIS LATER
     .then(function(response){
         return response.json()
     })
@@ -111,7 +130,12 @@ function getMoviesByTitle(movieTitleString){
 }
     // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
-    fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}`)
+    if(genreID){
+        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres${genreID}&region=US`;
+    } else {
+        fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US`
+    }
+    fetch(fetchAPI)
     .then(function(response){
         return response.json()
     })
@@ -121,11 +145,32 @@ function getMoviesByYear(movieReleaseYearString){
     })
 }
 
+    // This function will search all movies based on the genre selected
+function getMoviesByGenre(event){
+    genreID = event.target.value;
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&with_genres${genreID}&region=US`)
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        removeRenderMovies();
+        data.results.forEach(getFullMovieDetails)
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+}
 
 // These functions pertain to searches made regarding a movie's cast and his/her name
     // This function will take the name of an actor/actress searched, retrieve their ID, then pass it to the getActorsFilmography function
 function getMoviesByActors(actorNameString){
-    fetch(`http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}`)
+    if(genreID){
+        fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US&with_genres${genreID}`;
+    } else {
+        fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US`
+    }
+
+    fetch(fetchAPI)
     .then(function(response){
         return response.json();
     })
@@ -155,18 +200,34 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
+        console.log(data);
+        if(genreID){
+            if(data.genres.length === 0){
+            return;
+            } else {
+                for(let i = 0; i < data.genres.length; i++){
+                    console.log(data.genres[i].name);
+                    if(data.genres[i].name === genres[genreID]){
+                        break;
+                    } else if(i === data.genres.length-1){
+                        return;
+                    }
+                }
+            }
+        } 
+        let newMovieCell = document.createElement('div');
         let newMovieCard = document.createElement('div');
         let newMovieImg = document.createElement('img');
+        let newMovieCardSection = document.createElement('div')
         newMovieImg.src = `${movieImgURL}${data.poster_path}`;
-        let newMovieTitle = document.createElement('h3');
+        let newMovieTitle = document.createElement('h5');
         newMovieTitle.textContent = data.original_title;
-        let newMovieYear = document.createElement('h4');
+        let newMovieYear = document.createElement('h6');
         newMovieYear.textContent = `Released: ${data.release_date.substr(0,4)}`;
-        let newMovieRating = document.createElement('h4');
+        let newMovieRating = document.createElement('h6');
 
         for(let i = 0; i < data.release_dates.results.length; i++){
             if(data.release_dates.results[i].iso_3166_1 === 'US'){
-                console.log(data.original_title, data.release_dates.results);
                 if(noRating.includes(data.release_dates.results[i].release_dates[0].certification)){
                     newMovieRating.textContent = `Unrated`
                     continue;
@@ -178,7 +239,7 @@ function getFullMovieDetails(movie){
         if(newMovieRating.textContent === '' || newMovieRating.textContent === undefined){
             newMovieRating.textContent = `Unrated`;
         }
-        let newMovieGenres = document.createElement('h5');
+        let newMovieGenres = document.createElement('h6');
         for(let i = 0; i < data.genres.length; i++){
             if(i === data.genres.length-1){
                 newMovieGenres.textContent += `${data.genres[i].name}`
@@ -187,18 +248,21 @@ function getFullMovieDetails(movie){
             }
         }
         newMovieCard.appendChild(newMovieImg);
-        newMovieCard.appendChild(newMovieTitle);
-        newMovieCard.appendChild(newMovieYear);
-        newMovieCard.appendChild(newMovieRating);
-        newMovieCard.appendChild(newMovieGenres);
+        newMovieCard.appendChild(newMovieCardSection);
         newMovieCard.setAttribute('class', 'movieCard');
-        newMovieCard.setAttribute('data-open', 'exampleModal1')
-        renderedMovies.appendChild(newMovieCard);
-        newMovieCard.addEventListener("click", updateModal)
-
-        function updateModal() {
-            console.log(modalMovieTitle)
-        }
+        newMovieCardSection.appendChild(newMovieTitle);
+        newMovieCardSection.appendChild(newMovieYear);
+        newMovieCardSection.appendChild(newMovieRating);
+        newMovieCardSection.appendChild(newMovieGenres);
+        newMovieCardSection.setAttribute('class', 'card-section')
+        newMovieCell.appendChild(newMovieCard);
+        newMovieCell.setAttribute('class','column');
+        renderedMovies.appendChild(newMovieCell);
+        //if img throws an error the src will change to the new placeholder 
+        newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x400'")
+    })
+    .catch(function(error){
+        console.log(error);
     })
 };
 
@@ -212,6 +276,7 @@ function removeRenderMovies(){
 
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
+genresDropdown.addEventListener("change", getMoviesByGenre);
 
 // This function will take the users zipcode and return 5 restaurants located within that zipcode. 
 function getRestaurantByZipcode(){
