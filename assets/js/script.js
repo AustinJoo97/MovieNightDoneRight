@@ -163,12 +163,7 @@ function getMoviesByGenre(event){
 // These functions pertain to searches made regarding a movie's cast and his/her name
     // This function will take the name of an actor/actress searched, retrieve their ID, then pass it to the getActorsFilmography function
 function getMoviesByActors(actorNameString){
-    if(genreID){
-        fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US&with_genres${genreID}`;
-    } else {
-        fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US`
-    }
-
+    fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US`
     fetch(fetchAPI)
     .then(function(response){
         return response.json();
@@ -199,13 +194,11 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
         if(genreID){
             if(data.genres.length === 0){
             return;
             } else {
                 for(let i = 0; i < data.genres.length; i++){
-                    console.log(data.genres[i].name);
                     if(data.genres[i].name === genres[genreID]){
                         break;
                     } else if(i === data.genres.length-1){
@@ -286,7 +279,6 @@ function getRestaurantByZipcode(){
         return response.json()
     })
     .then(function (data) {
-        console.log(data.data)
         let restInfo = data.data
         for (let i = 0; i < restInfo.length; i++){
             let restaurantName = document.createElement('h6')
