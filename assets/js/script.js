@@ -147,7 +147,7 @@ function getMoviesByYear(movieReleaseYearString){
     // This function will search all movies based on the genre selected
 function getMoviesByGenre(event){
     genreID = event.target.value;
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&with_genres${genreID}&region=US`)
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&with_genres${genreID}&region=US`)
     .then(function(response){
         return response.json()
     })
@@ -199,15 +199,16 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
-        // console.log(data);
+        console.log(data);
         if(genreID){
             if(data.genres.length === 0){
             return;
             } else {
                 for(let i = 0; i < data.genres.length; i++){
-                    if(data.genres[i].id == genreID){
+                    console.log(data.genres[i].name);
+                    if(data.genres[i].name === genres[genreID]){
                         break;
-                    } else if(i === data.genres.length-1 && data.genres[i].id !== genreID){
+                    } else if(i === data.genres.length-1){
                         return;
                     }
                 }
