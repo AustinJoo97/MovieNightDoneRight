@@ -260,7 +260,7 @@ function getFullMovieDetails(movie){
         newMovieCell.setAttribute('class','column');
         renderedMovies.appendChild(newMovieCell);
         //if img throws an error the src will change to the new placeholder 
-        newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x400'")
+        newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x450'")
     })
     .catch(function(error){
         console.log(error);
