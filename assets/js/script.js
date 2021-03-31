@@ -140,15 +140,16 @@ function getMoviesByYear(movieReleaseYearString){
     // console.log('this is movie release year: ' + movieReleaseYearString);
     for(let i = 1; i < 20; i++){
         if(genreID){
-            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&with_genres=${genreID}&region=US&page=${i}`;
+            fetchAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&region=US&primary_release_year=${movieReleaseYearString}&with_genres=${genreID}&region=US&page=${i}`;
         } else {
-            fetchAPI = `${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&primary_release_year=${movieReleaseYearString}&region=US&page=${i}`
+            fetchAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&region=US&primary_release_year=${movieReleaseYearString}&region=US&page=${i}`
         }
         fetch(fetchAPI)
         .then(function(response){
             return response.json()
         })
         .then(function(data){
+            console.log(data);
             removeRenderMovies();
             data.results.forEach(getFullMovieDetails)
         })
@@ -162,8 +163,7 @@ function getMoviesByYear(movieReleaseYearString){
 function getMoviesByGenre(event){
     genreID = event.target.value;
     for(let i = 1; i < 20; i++){
-        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres=${genreID}&region=US&page=${i}`)
-        // fetch(`${tmdbAPI}${apiKey}&language=en-US&sort_by=popularity.desc&query=allS&include_adult=true&region=US&with_genres${genreID}&region=US&page=${i}`)
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&region=US&with_genres=${genreID}&region=US&page=${i}`)
         .then(function(response){
             return response.json()
         })
@@ -205,6 +205,7 @@ function getActorsFilmography(actorID){
 // This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
+    // console.log(movie);
     let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR', '']
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
@@ -212,16 +213,22 @@ function getFullMovieDetails(movie){
     })
     .then(function(data){
         if(genreID){
-            if(data.genres.length === 0){
-            return;
-            } else {
-                for(let i = 0; i < data.genres.length; i++){
-                    if(data.genres[i].name === genres[genreID]){
-                        break;
-                    } else if(i === data.genres.length-1){
-                        return;
+            if(data.genres){
+                if(data.genres.length === 0){
+                    return;
+                } else {
+                    for(let i = 0; i < data.genres.length; i++){
+                        if(data.genres[i].name === genres[genreID]){
+                            break;
+                        } else if(i === data.genres.length-1){
+                            return;
+                        }
                     }
                 }
+            } else if(data.genre_ids){
+                if(!data.genre_ids.includes(genreID)){
+                    return;
+                } 
             }
         } 
         let newMovieCell = document.createElement('div');
@@ -321,6 +328,3 @@ function getRestaurantByZipcode(){
 
 getRestBtn.addEventListener("click", getRestaurantByZipcode)
 
-
-// Added functionality to account for selected genres when searching for top rated movies (by clicking search with empty search query)
-// When a genre is selected, have all featured movies of the genre render to the DOM instead of only filtering nowPlaying movies
