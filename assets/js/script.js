@@ -258,8 +258,13 @@ function getFullMovieDetails(movie){
         newMovieCell.appendChild(newMovieCard);
         newMovieCell.setAttribute('class','column');
         renderedMovies.appendChild(newMovieCell);
+        newMovieCard.addEventListener("click", upDateModal)
         //if img throws an error the src will change to the new placeholder 
         newMovieImg.setAttribute('onerror',"this.onerror=null;this.src='https://placehold.it/300x450'")
+
+        function upDateModal() {
+            modalMovieTitle.textContent += newMovieTitle.textContent
+        }
     })
     .catch(function(error){
         console.log(error);
