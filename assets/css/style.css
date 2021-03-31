@@ -6,8 +6,10 @@ body {
     background-color: #292b2c;
 }
 
+
+
 .row-search {
-    width: 365px;
+    width: fit-content;
     padding: 0px;
     margin: auto !important;
 }
@@ -155,6 +157,7 @@ body {
 #criteriaInput hr {
     border-color:#32946e ;
 }
+
 
 @media screen and (max-width: 535px) {
     .top-bar-left {
