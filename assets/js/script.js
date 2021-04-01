@@ -10,10 +10,12 @@ let renderedMovies = document.getElementById('renderedMovies');
 let genres = {};
 let genreID;
 let fetchAPI;
+let toggle = document.getElementById('toggleRendered');
+let toggleStatus = false;
 let restaurantContainer = document.getElementById('restaurants')
 let userZip = document.getElementById('userZip')
 let getRestBtn = document.getElementById('getRestBtn')
-let modalMovieTitle = document.getElementById('modalMovieTitle')
+let modalMovieTitle = document.getElementById('modalMovieTitle');
 
 
 // This function will run when the page is initially loaded, running all vital functions for the page to run as intended
@@ -386,15 +388,19 @@ function saveMovieToLocal(movieCard){
 //===================================================================================================================================================================================
 // THIS FUNCTION IS RESPONSIBLE FOR RENDERING EITHER THE moviesNowPlaying() FUNCTION OR THE renderRecentMovies() FUNCTION THAT WILL RENDER ALL MOVIES SAVED IN LOCALSTORAGE
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function swapMoviesRendered(){
-    // Toggle being set to now playing movies is true
-    // Toggle being set to recent movies is false
-    
-    // if(toggle === true){
-    //     getMoviesNowPlaying();
-    // } else if(toggle === false){
-    //     renderRecentMovies()
-    // }
+function swapMoviesRendered(event){ 
+
+    if(toggleStatus === false){
+        removeRenderMovies();
+        renderRecentMovies()
+        toggleStatus = true;
+        event.target.textContent = 'Newly Released Movies'
+    } else if(toggleStatus === true){
+        removeRenderMovies();
+        getMoviesNowPlaying();
+        toggleStatus = false;
+        event.target.textContent = 'Recently Viewed'
+    }
 };
 
 function renderRecentMovies(){
@@ -461,5 +467,6 @@ function getRestaurantByZipcode(){
 initializer();
 searchForMovies.addEventListener("submit", retrieveMovies)
 genresDropdown.addEventListener("change", getMoviesByGenre);
-getRestBtn.addEventListener("click", getRestaurantByZipcode)
+getRestBtn.addEventListener("click", getRestaurantByZipcode);
+toggle.addEventListener('click', swapMoviesRendered)
 
