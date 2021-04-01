@@ -266,7 +266,7 @@ function getFullMovieDetails(movie){
                 if(!data.credits.cast[i]){
                     break;
                 } else {
-                    if(Number(data.credits.cast[i].popularity) > 3){
+                    if(Number(data.credits.cast[i].popularity) > 2){
                         if(i === data.credits.cast.length-1){
                             newMovieCast.textContent += `${data.credits.cast[i].original_name}`
                             return;
