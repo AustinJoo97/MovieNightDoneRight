@@ -65,13 +65,13 @@ body {
 }
 
 .rounded-right {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .rounded-left {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .searchOptions {
@@ -189,6 +189,31 @@ body {
 hr {
     border-color:#32946e ;
     margin-top: 40px;
+}
+
+.recentBtn {
+    position: relative;
+    top:-15px;
+    padding: 0px 5px;
+    background-color: #32946e;
+    outline: none;
+    border:none;
+    color: rgb(255, 255, 255);
+    text-align-last:center;
+    cursor: pointer;
+    font-size: 16px;
+    height: 26px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#recentBtn {
+    display: none;
+}
+
+#recentBtn:checked + .recentBtn {
+    background-color:rgb(75, 189, 255);
+    color:black;
 }
 
 @-webkit-keyframes swing
