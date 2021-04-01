@@ -383,6 +383,19 @@ function saveMovieToLocal(movieCard){
     localStorage.setItem('recentMovies', JSON.stringify(recentMovies));
 }
 
+//===================================================================================================================================================================================
+// THIS FUNCTION IS RESPONSIBLE FOR RENDERING EITHER THE moviesNowPlaying() FUNCTION OR THE renderRecentMovies() FUNCTION THAT WILL RENDER ALL MOVIES SAVED IN LOCALSTORAGE
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function swapMoviesRendered(){};
+
+function renderRecentMovies(){
+    let recentMoviesArray = JSON.parse(localStorage.getItem('recentMovies'));
+    for(let i = 0; i < recentMoviesArray.length; i++){
+        getFullMovieDetails(recentMoviesArray[i]);
+    }
+    return;
+}
+
 // ===================================================================================================================================================================================
 // THESE FUNCTIONS MAYBE PERTAIN TO MAINTENANCE AND CLEARING OF THE DOM TO PREVENT REPTITIVE DATA FROM BEING RENDERED AS WELL AS TO PROVIDE A BETTER UIUX
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
