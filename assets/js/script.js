@@ -4,7 +4,6 @@ let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
 let foodAPI = 'https://api.documenu.com/v2/restaurants/zip_code/'
 let foodAPIkey = '?key=c5752c8e949ff34a04ffeb67f70d2988&size=5';
-// User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
 let renderedMovies = document.getElementById('renderedMovies');
@@ -17,11 +16,13 @@ let getRestBtn = document.getElementById('getRestBtn')
 let modalMovieTitle = document.getElementById('modalMovieTitle')
 
 
+// This function will run when the page is initially loaded, running all vital functions for the page to run as intended
 function initializer(){
     genresPopulation();
     getMoviesNowPlaying();
 }
 
+// This function will generate the dropdown menu, listing all filterable genres
 function genresPopulation(){
     fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`)
     .then(function(response){
@@ -38,6 +39,12 @@ function genresPopulation(){
     })
 }
 
+
+// ===================================================================================================================================================================================
+// THE FOLLOWING CODE PERTAINS TO THE SEARCH FUNCTIONALITY, FETCH ABILITY, AND RENDERING CAPABILITIES OF THE APPLICATION
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// This function will take any query entered into the search input and, depending on if and/or what search criteria was chosen to return a specific set of results
 function retrieveMovies(event){
     event.preventDefault();
     let searchCriteriaChosen = this.childNodes[1].childNodes[1].value;
@@ -115,8 +122,11 @@ function getTopRatedMovies(){
     })
 }
 
-// These functions pertain to searches made regarding a movie's information (title, year released)
-    // This function will perform a search for all movies based on title/keyword then get each movie's full details
+// ===================================================================================================================================================================================
+// THESE FUNCTIONS PERTAIN TO SEARCHES MADE REGARDING A MOVIE'S INFORMATION (TITLE/YEAR RELEASED/GENRE)
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// This function will perform a search for all movies based on title/keyword then get each movie's full details
 function getMoviesByTitle(movieTitleString){
     for(let i = 1; i < 20; i++){
         if(genreID){
@@ -135,9 +145,9 @@ function getMoviesByTitle(movieTitleString){
         })
     }
 }
+
     // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
-    // console.log('this is movie release year: ' + movieReleaseYearString);
     for(let i = 1; i < 20; i++){
         if(genreID){
             fetchAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&region=US&primary_release_year=${movieReleaseYearString}&with_genres=${genreID}&region=US&page=${i}`;
@@ -149,7 +159,6 @@ function getMoviesByYear(movieReleaseYearString){
             return response.json()
         })
         .then(function(data){
-            console.log(data);
             removeRenderMovies();
             data.results.forEach(getFullMovieDetails)
         })
@@ -177,8 +186,11 @@ function getMoviesByGenre(event){
     }
 }
 
-// These functions pertain to searches made regarding a movie's cast and his/her name
-    // This function will take the name of an actor/actress searched, retrieve their ID, then pass it to the getActorsFilmography function
+// ===================================================================================================================================================================================
+// THESE FUNCTIONS PERTAIN TO SEARCHES MADE USEING A MOVIE'S CAST MEMBER'S NAME
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// This function will take the name of an actor/actress searched, retrieve their ID, then pass it to the getActorsFilmography function
 function getMoviesByActors(actorNameString){
     fetchAPI = `http://api.tmdb.org/3/search/person?api_key=${apiKey}&query=${actorNameString}&region=US`
     fetch(fetchAPI)
@@ -189,6 +201,7 @@ function getMoviesByActors(actorNameString){
         getActorsFilmography(data.results[0].id)
     })
 }
+
 // This function will take the actor's ID passed from the above function and return his/her full filmography
     // It will then take the ID of each film and pass it into the getFullMovieDetailsFunction
 function getActorsFilmography(actorID){
@@ -202,17 +215,19 @@ function getActorsFilmography(actorID){
     })
 }
 
+// ===================================================================================================================================================================================
+// THIS IS THE MOST VITAL AND MOST UTILIZED FUNCTION THAT WILL TAKE EVERY MOVIE RETURNED TO THE APPLICATION AND RENDER ALL OF ITS INFORMATION TO THE DOM AS WELL AS UPDATING EACH CREATED MOVIE CARD'S MODAL 
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 // This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
-    // console.log(movie);
     let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR', '']
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -245,7 +260,30 @@ function getFullMovieDetails(movie){
         let newMovieID = document.createElement('span');
         newMovieID.textContent = data.id;
         let newMovieCast = document.createElement('span');
-        newMovieCast.textContent = data.credits.cast;
+        newMovieCast.textContent = '';
+        if(data.credits.cast){
+            for(let i = 0; i < data.credits.cast.length; i++){
+                if(!data.credits.cast[i]){
+                    break;
+                } else {
+                    if(Number(data.credits.cast[i].popularity) > 2){
+                        if(i === data.credits.cast.length-1){
+                            newMovieCast.textContent += `${data.credits.cast[i].original_name}`
+                            return;
+                        } else {
+                            newMovieCast.textContent += `${data.credits.cast[i].original_name}, `
+                        }
+                    } else if(i+1 === data.credits.cast.length){
+                        newMovieCast.textContent = newMovieCast.textContent.slice(0, -2);
+                    }
+                }
+            }
+            if(newMovieCast.textContent === ''){
+                newMovieCast.textContent = 'No Actors/Actresses Listed';    
+            }
+        } else {
+            newMovieCast.textContent = 'No Actors/Actresses Listed';
+        }
         let newMovieSynopsis = document.createElement('span');
         newMovieSynopsis.textContent = data.overview;
         let newMovieReview = document.createElement('span');
@@ -302,20 +340,20 @@ function getFullMovieDetails(movie){
     })
 };
 
-// This is a function that will clear all movie cards before rendering the next set to the DOM
-function removeRenderMovies(){
-    while(renderedMovies.firstChild){
-        renderedMovies.removeChild(renderedMovies.firstChild)
-    }
-    return;
-}
+// ===================================================================================================================================================================================
+// THESE ARE THE EVENT HANDLERS OF THE APPLICATION
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+// This is a function that serves the purpose of triggering multiple functions based on an eventHandler
 function movieCardClickFunctions(){
     upDateModal(this);
     saveMovieToLocal(this);
+    removeRestaurants();
 }
 
+// This function will update the text of the modal based on what movieCard is clicked
 function upDateModal(movieCard) {
+    document.getElementById('modalMovieImage').src = movieCard.childNodes[0].src;
     document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
     document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
     document.getElementById('modalMovieOverview').innerHTML = `<b>Synopsis: </b>${movieCard.childNodes[1].childNodes[6].textContent}`;
@@ -325,6 +363,7 @@ function upDateModal(movieCard) {
 
 }
 
+// This function will save any clicked movie to localStorage for later retrieval upon triggering a toggle
 function saveMovieToLocal(movieCard){
     if(!localStorage.getItem('recentMovies')){
         localStorage.setItem('recentMovies', JSON.stringify([]));
@@ -341,16 +380,57 @@ function saveMovieToLocal(movieCard){
         }
     }
     recentMovies.unshift(movieToSave);
-    console.log(recentMovies);
     localStorage.setItem('recentMovies', JSON.stringify(recentMovies));
 }
 
-initializer();
-searchForMovies.addEventListener("submit", retrieveMovies)
-genresDropdown.addEventListener("change", getMoviesByGenre);
+//===================================================================================================================================================================================
+// THIS FUNCTION IS RESPONSIBLE FOR RENDERING EITHER THE moviesNowPlaying() FUNCTION OR THE renderRecentMovies() FUNCTION THAT WILL RENDER ALL MOVIES SAVED IN LOCALSTORAGE
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function swapMoviesRendered(){
+    // Toggle being set to now playing movies is true
+    // Toggle being set to recent movies is false
+    
+    // if(toggle === true){
+    //     getMoviesNowPlaying();
+    // } else if(toggle === false){
+    //     renderRecentMovies()
+    // }
+};
+
+function renderRecentMovies(){
+    let recentMoviesArray = JSON.parse(localStorage.getItem('recentMovies'));
+    for(let i = 0; i < recentMoviesArray.length; i++){
+        getFullMovieDetails(recentMoviesArray[i]);
+    }
+    return;
+}
+
+// ===================================================================================================================================================================================
+// THESE FUNCTIONS MAYBE PERTAIN TO MAINTENANCE AND CLEARING OF THE DOM TO PREVENT REPTITIVE DATA FROM BEING RENDERED AS WELL AS TO PROVIDE A BETTER UIUX
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// This is a function that will clear all movie cards before rendering the next set to the DOM
+function removeRenderMovies(){
+    while(renderedMovies.firstChild){
+        renderedMovies.removeChild(renderedMovies.firstChild)
+    }
+    return;
+}
+
+// This function will clear all the resturants previously rendered to the modal
+function removeRestaurants(){
+    while(restaurantContainer.firstChild){
+        restaurantContainer.removeChild(restaurantContainer.firstChild);
+    }
+}
+
+// ===================================================================================================================================================================================
+// THIS FUNCTION PERTAINS TO THE USE OF A GEOLOCATOR AND USING IT TO RENDER LOCAL RESTAURANT INFORMATION
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // This function will take the users zipcode and return 5 restaurants located within that zipcode. 
 function getRestaurantByZipcode(){
+    removeRestaurants();
     let zipcode = userZip.value
 
     fetch(`https://api.documenu.com/v2/restaurants/zip_code/${zipcode}${foodAPIkey}`)
@@ -370,9 +450,16 @@ function getRestaurantByZipcode(){
             restaurantContainer.appendChild(restaurantPhone)
             restaurantContainer.appendChild(restaurantAddress)
         }
-
     })
+    userZip.value = '';
 }
 
+// ===================================================================================================================================================================================
+// THESE ARE THE LINES OF CODE THAT WILL EITHER RUN WHEN THE APPLICATION IS LOADED INTIALLY OR WHEN CERTAIN EVENTS ARE TRIGGERED
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+initializer();
+searchForMovies.addEventListener("submit", retrieveMovies)
+genresDropdown.addEventListener("change", getMoviesByGenre);
 getRestBtn.addEventListener("click", getRestaurantByZipcode)
 
