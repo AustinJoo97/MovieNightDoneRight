@@ -49,6 +49,7 @@ function genresPopulation(){
 // This function will take any query entered into the search input and, depending on if and/or what search criteria was chosen to return a specific set of results
 function retrieveMovies(event){
     event.preventDefault();
+    toggle.textContent = this.childNodes[1].childNodes[3].value;
     let searchCriteriaChosen = this.childNodes[1].childNodes[1].value;
     let searchQuery = this.childNodes[1].childNodes[3].value;
     let searchQueryArray;
@@ -109,6 +110,7 @@ function getMoviesNowPlaying(){
 // This function will render the top movies on tmdb
     // They will be rendered if the user searches without a query or upon initial page loads
 function getTopRatedMovies(){
+    toggle.textContent = 'Top Rated Movies';
     if(genreID){
         fetchAPI = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1&region=US&with_genres=${genreID}`
     } else {
@@ -389,17 +391,15 @@ function saveMovieToLocal(movieCard){
 // THIS FUNCTION IS RESPONSIBLE FOR RENDERING EITHER THE moviesNowPlaying() FUNCTION OR THE renderRecentMovies() FUNCTION THAT WILL RENDER ALL MOVIES SAVED IN LOCALSTORAGE
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function swapMoviesRendered(event){ 
-
+    removeRenderMovies();
     if(toggleStatus === false){
-        removeRenderMovies();
         renderRecentMovies()
         toggleStatus = true;
-        event.target.textContent = 'Newly Released Movies'
+        event.target.textContent = 'Recently Viewed'
     } else if(toggleStatus === true){
-        removeRenderMovies();
         getMoviesNowPlaying();
         toggleStatus = false;
-        event.target.textContent = 'Recently Viewed'
+        event.target.textContent = 'Newly Released Movies'
     }
 };
 
