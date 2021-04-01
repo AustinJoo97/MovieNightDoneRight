@@ -245,7 +245,31 @@ function getFullMovieDetails(movie){
         let newMovieID = document.createElement('span');
         newMovieID.textContent = data.id;
         let newMovieCast = document.createElement('span');
-        newMovieCast.textContent = data.credits.cast;
+        newMovieCast.textContent = '';
+        console.log(data.credits);
+        if(data.credits.cast){
+            for(let i = 0; i < data.credits.cast.length; i++){
+                if(!data.credits.cast[i]){
+                    break;
+                } else {
+                    if(Number(data.credits.cast[i].popularity) > 3){
+                        if(i === data.credits.cast.length-1){
+                            newMovieCast.textContent += `${data.credits.cast[i].original_name}`
+                            return;
+                        } else {
+                            newMovieCast.textContent += `${data.credits.cast[i].original_name}, `
+                        }
+                    } else if(i+1 === data.credits.cast.length){
+                        newMovieCast.textContent = newMovieCast.textContent.slice(0, -2);
+                    }
+                }
+            }
+            if(newMovieCast.textContent === ''){
+                newMovieCast.textContent = 'No Actors/Actresses Listed';    
+            }
+        } else {
+            newMovieCast.textContent = 'No Actors/Actresses Listed';
+        }
         let newMovieSynopsis = document.createElement('span');
         newMovieSynopsis.textContent = data.overview;
         let newMovieReview = document.createElement('span');
