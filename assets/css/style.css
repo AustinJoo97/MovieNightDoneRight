@@ -11,16 +11,19 @@ body {
 .row-search {
     width: fit-content;
     padding: 0px;
-    margin-bottom: 10px;
-    /* margin: auto !important; */
+    height: 26px;
+    margin: 4px auto !important;
 }
 
 .row-C {
-    margin: auto !important;
-    justify-content: center !important;
-    text-align: center !important;
+    margin: 0 auto;
+    /* height: 40px; */
+    width: 100%;
 }
 
+#searchOptions {
+
+}
 
 .input-custom {
     width: 100px;
@@ -32,7 +35,7 @@ body {
 
 .top-bar {
     background-color: #292b2c;
-    padding: 1%;
+    padding-top: 1%;
 
 }
 
@@ -45,18 +48,16 @@ body {
 }
 
 .btn {
+    position: relative;
+    padding: 0px 5px;
     background-color: #32946e;
-    margin: 0;
     outline: none;
     border:none;
     color: rgb(255, 255, 255);
     text-align-last:center;
     cursor: pointer;
-    /* border-color: #3fca95; */
-    /* border: solid #000000c7 ; */
-    border-width: 2px;
     font-size: 16px;
-    height: 32px;
+    height: 26px;
 }
 
 .btn:hover {
@@ -65,18 +66,13 @@ body {
 }
 
 .rounded-right {
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .rounded-left {
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-.searchOptions {
-    text-align: center;
-    justify-content: center;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 #searchQuery {
@@ -84,8 +80,8 @@ body {
     bottom:1px;
     padding: 0;
     margin: 0;
-    width: 170px;
-    height: 32px;
+    width: 160px;
+    height: 26px;
     outline: none;
     background-color: rgb(192, 192, 192);
     border-style:none ;
@@ -97,7 +93,8 @@ body {
 
 #searchCriteria {
     position: relative;
-    width: 110px;
+    width: 100px;
+    padding-left:0px ;
 }
 
 #searchCriteria option {
@@ -105,7 +102,8 @@ body {
 }
 
 #genresDropdown {
-    width: 150px;
+    width: 135px;
+    padding-left: 0px;
 }
 
 .column-c {
@@ -164,10 +162,9 @@ body {
 }
 
 #criteriaInput {
-    margin-top: 0px;
-    margin-bottom: 25px;
     color: rgb(202, 202, 202);
-
+    left: 20px;
+    position: relative;
 }
 
 .bg {
@@ -181,14 +178,56 @@ body {
 }
 
 
-#criteriaInput h1 {
-    text-shadow:3px 3px 15px #3fca95 ;
+#criteriaInput h3 {
+    text-shadow:3px 3px 15px #9ce746 ;
     font-family: 'Dela Gothic One', cursive;
 }
 
 hr {
     border-color:#32946e ;
     margin-top: 40px;
+}
+
+.recentBtn {
+    position: relative;
+    top:-15px;
+    padding: 0px 5px;
+    background-color: #32946e;
+    outline: none;
+    border:none;
+    color: rgb(255, 255, 255);
+    text-align-last:center;
+    cursor: pointer;
+    font-size: 16px;
+    height: 26px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.criBtn {
+    position: relative;
+    top:-42px;
+    left: 10px;
+    padding: 0px 5px;
+    background-color: #32946e;
+    outline: none;
+    border:none;
+    color: rgb(255, 255, 255);
+    text-align-last:center;
+    cursor: pointer;
+    font-size: 16px;
+    height: 26px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+#recentBtn {
+    display: none;
+}
+
+#recentBtn:checked + .recentBtn {
+    background-color:rgb(31, 173, 255);
+    color:rgb(0, 49, 39);
 }
 
 @-webkit-keyframes swing
@@ -258,32 +297,23 @@ hr {
     }
 }
 
-.swing
-{
-        -webkit-animation: swing 6s ease;
-        animation: swing 6s ease;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
+.swing {
+    -webkit-animation: swing 6s ease;
+    animation: swing 6s ease;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
-@media screen and (max-width: 535px) {
-    .top-bar-left {
-        margin-left: 170px;
+@media screen and (max-width: 730px) {
+    #criteriaInput {
+        width: 100%;
+        left:5px;
         margin-bottom: 10px;
-    }
-    
-    .top-bar-right {
-        margin-right:65px ;
-    }
-}
 
-@media screen and (max-width: 480px) {
-    .top-bar-left {
-        margin-left: 0px;
     }
-
-    .top-bar-right {
-        margin-right: 0px ;
+    #searchOptions {
+        width: 100%;
+        margin-bottom: 5px;
     }
 }
 

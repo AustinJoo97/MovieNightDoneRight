@@ -16,23 +16,13 @@
 <body>
     <!-- We can use header as nav bar -->
     <header class="top-bar">
-        <div class="row swing text-center" id=criteriaInput>
-            <div class="row">
-                <h1 class="column-c">Movie Night . .</h1>
-            </div>
-            <div class="row">
-                <h1 class="column-c done-c">Done Right !</h>
-            </div>
-        </div>
         <nav class="row row-C">
-            
-            <div class="top-bar-left m-a">
-                <select id='genresDropdown' class="btn rounded-left rounded-right" >
-                    <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
-                </select>
+            <div class="column swing text-center" id=criteriaInput>
+                <div class="row">
+                    <h3 class="column-c">Movie Night . . Done Right !</h3>
+                </div>
             </div>
-            
-            <form id='searchOptions' class="top-bar-right">
+            <form id='searchOptions' class="column">
                 <div class="row row-search">
                     <select class="small-12 medium-3 btn rounded-left " id='searchCriteria' selected='Search by:'>
                         <option value='allMovies' selected>All Movies</option>
@@ -42,8 +32,6 @@
                     </select>
                     <input class="mr-0" size="25"  id='searchQuery'>
                     <button class="btn rounded-right ms-0" id='searchButton'>Search</button>
-
-
                 </div>
 
             </form>
@@ -71,6 +59,20 @@
 
 
     <hr>
+    <div class="row">
+        <input  type="checkbox" id="recentBtn" name="recentBtn">
+        <label class="top-bar-right recentBtn btn"  for="recentBtn">Recently Viewed</label>
+    </div>
+    <div class="row">
+           <div class=" m-a">
+        <select id='genresDropdown' class="criBtn btn" >
+            <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
+        </select>
+    </div> 
+    </div>
+
+    
+
     <main class="row small-up-2 large-up-4" id="renderedMovies">
     </main>
 
