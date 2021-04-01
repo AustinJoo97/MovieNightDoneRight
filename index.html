@@ -16,13 +16,20 @@
 <body>
     <!-- We can use header as nav bar -->
     <header class="top-bar">
+        <div class="row swing text-center" id=criteriaInput>
+            <div class="row">
+                <h1 class="column-c">Movie Night . .</h1>
+            </div>
+            <div class="row">
+                <h1 class="column-c done-c">Done Right !</h>
+            </div>
+        </div>
         <nav class="row row-C">
             
             <div class="top-bar-left m-a">
                 <select id='genresDropdown' class="btn rounded-left rounded-right" >
                     <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
                 </select>
-
             </div>
             
             <form id='searchOptions' class="top-bar-right">
@@ -45,7 +52,6 @@
 
     <div class="row">
         <div class="columns">
-      
           <div class="reveal" id="exampleModal1" data-reveal>
             <h2 id="modalMovieImage">Image Goes Here</h1>
             <p id="modalMovieTitle" class="lead">Movie Title: </p>
@@ -63,14 +69,7 @@
         </div>
     </div> 
 
-    <div class="row swing text-center" id=criteriaInput>
-        <div class="row">
-            <h1 class="column-c">Movie Night . .</h1>
-        </div>
-        <div class="row">
-            <h1 class="column-c done-c">Done Right !</h>
-        </div>
-    </div>
+
     <hr>
     <main class="row small-up-2 large-up-4" id="renderedMovies">
     </main>

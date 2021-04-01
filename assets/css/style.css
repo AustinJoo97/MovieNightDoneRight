@@ -1,5 +1,5 @@
 header {
-    box-shadow: 0 0 20px black;
+    box-shadow: 0 0 20px #32946e77;
 }
 
 body {
@@ -11,7 +11,8 @@ body {
 .row-search {
     width: fit-content;
     padding: 0px;
-    margin: auto !important;
+    margin-bottom: 10px;
+    /* margin: auto !important; */
 }
 
 .row-C {
@@ -163,7 +164,7 @@ body {
 }
 
 #criteriaInput {
-    margin-top: 35px;
+    margin-top: 0px;
     margin-bottom: 25px;
     color: rgb(202, 202, 202);
 
@@ -179,19 +180,6 @@ body {
     left: 0;
 }
 
-.titleContainer {
-    position: absolute;
-    top:70px;
-    width: 100%;
-    margin-left:  auto ;
-    margin-right: auto;
-    text-align: center;
-    justify-content: center;
-}
-
-.img-c {
-    width: 100%;
-}
 
 #criteriaInput h1 {
     text-shadow:3px 3px 15px #3fca95 ;
@@ -200,6 +188,7 @@ body {
 
 hr {
     border-color:#32946e ;
+    margin-top: 40px;
 }
 
 @-webkit-keyframes swing
@@ -271,8 +260,8 @@ hr {
 
 .swing
 {
-        -webkit-animation: swing 5s ease;
-        animation: swing 5s ease;
+        -webkit-animation: swing 6s ease;
+        animation: swing 6s ease;
         -webkit-animation-iteration-count: infinite;
         animation-iteration-count: infinite;
 }
