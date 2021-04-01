@@ -212,7 +212,7 @@ function getFullMovieDetails(movie){
         return response.json()
     })
     .then(function(data){
-        console.log(data);
+        // console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -316,6 +316,8 @@ function movieCardClickFunctions(){
 }
 
 function upDateModal(movieCard) {
+    console.log(movieCard)
+    document.getElementById('modalMovieImage').src = movieCard.childNodes[0].src;
     document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
     document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
     document.getElementById('modalMovieOverview').innerHTML = `<b>Synopsis: </b>${movieCard.childNodes[1].childNodes[6].textContent}`;
