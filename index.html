@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Dela Gothic One Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <!-- CDB stylesheet for foundation -->
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -13,12 +16,20 @@
 <body>
     <!-- We can use header as nav bar -->
     <header class="top-bar">
+        <div class="row swing text-center" id=criteriaInput>
+            <div class="row">
+                <h1 class="column-c">Movie Night . .</h1>
+            </div>
+            <div class="row">
+                <h1 class="column-c done-c">Done Right !</h>
+            </div>
+        </div>
         <nav class="row row-C">
+            
             <div class="top-bar-left m-a">
                 <select id='genresDropdown' class="btn rounded-left rounded-right" >
                     <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
                 </select>
-
             </div>
             
             <form id='searchOptions' class="top-bar-right">
@@ -41,7 +52,6 @@
 
     <div class="row">
         <div class="columns">
-      
           <div class="reveal" id="exampleModal1" data-reveal>
             <h2 id="modalMovieImage">Image Goes Here</h1>
             <p id="modalMovieTitle" class="lead">Movie Title: </p>
@@ -59,12 +69,9 @@
         </div>
     </div> 
 
-    <div class="row  text-center" id=criteriaInput>
-        <h2>Movie Night!</h2>
-        <hr>
-    </div>
-    <main class="row small-up-2 large-up-4" id="renderedMovies">
 
+    <hr>
+    <main class="row small-up-2 large-up-4" id="renderedMovies">
     </main>
 
     <footer>

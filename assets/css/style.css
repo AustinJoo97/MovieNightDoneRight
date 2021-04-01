@@ -1,5 +1,5 @@
 header {
-    box-shadow: 0 0 20px black;
+    box-shadow: 0 0 20px #32946e77;
 }
 
 body {
@@ -11,7 +11,8 @@ body {
 .row-search {
     width: fit-content;
     padding: 0px;
-    margin: auto !important;
+    margin-bottom: 10px;
+    /* margin: auto !important; */
 }
 
 .row-C {
@@ -32,6 +33,7 @@ body {
 .top-bar {
     background-color: #292b2c;
     padding: 1%;
+
 }
 
 .mr-0 {
@@ -79,7 +81,7 @@ body {
 
 #searchQuery {
     position: relative;
-    bottom:2px;
+    bottom:1px;
     padding: 0;
     margin: 0;
     width: 170px;
@@ -106,6 +108,10 @@ body {
     width: 150px;
 }
 
+.column-c {
+    display: inline-block;
+}
+
 .top-bar-left {
     justify-content: center;
     text-align: center;
@@ -113,8 +119,7 @@ body {
 
 #searchButton {
     position: relative;
-    padding: 5px;
-    
+    padding: 5px;  
 }
 
 /* #renderedMovies{
@@ -149,7 +154,7 @@ body {
 
 .column {
     display: inline-block;
-   width: fit-content;
+    width: fit-content;
     height: min-content;
     justify-content: center;
 }
@@ -159,15 +164,107 @@ body {
 }
 
 #criteriaInput {
-    margin-top: 40px;
+    margin-top: 0px;
+    margin-bottom: 25px;
     color: rgb(202, 202, 202);
-    border-color:#3fca95 ;
+
 }
 
-#criteriaInput hr {
+.bg {
+    position: relative;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+}
+
+
+#criteriaInput h1 {
+    text-shadow:3px 3px 15px #3fca95 ;
+    font-family: 'Dela Gothic One', cursive;
+}
+
+hr {
     border-color:#32946e ;
+    margin-top: 40px;
 }
 
+@-webkit-keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+       transform: translateX(-5px);
+    } 
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+@keyframes swing
+{
+    15%
+    {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+    30%
+    {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+    65%
+    {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+    100%
+    {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+.swing
+{
+        -webkit-animation: swing 6s ease;
+        animation: swing 6s ease;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+}
 
 @media screen and (max-width: 535px) {
     .top-bar-left {
