@@ -4,7 +4,6 @@ let movieImgURL = 'https://image.tmdb.org/t/p/original/';
 let searchQueries = '';
 let foodAPI = 'https://api.documenu.com/v2/restaurants/zip_code/'
 let foodAPIkey = '?key=c5752c8e949ff34a04ffeb67f70d2988&size=5';
-// User poster path as endpoint for the above URL
 let genresDropdown = document.getElementById('genresDropdown');
 let searchForMovies = document.getElementById('searchOptions');
 let renderedMovies = document.getElementById('renderedMovies');
@@ -149,7 +148,6 @@ function getMoviesByTitle(movieTitleString){
 
     // This function will search and retrieve all movies based on the year released then get each movie's full details
 function getMoviesByYear(movieReleaseYearString){
-    // console.log('this is movie release year: ' + movieReleaseYearString);
     for(let i = 1; i < 20; i++){
         if(genreID){
             fetchAPI = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=true&region=US&primary_release_year=${movieReleaseYearString}&with_genres=${genreID}&region=US&page=${i}`;
@@ -161,7 +159,6 @@ function getMoviesByYear(movieReleaseYearString){
             return response.json()
         })
         .then(function(data){
-            console.log(data);
             removeRenderMovies();
             data.results.forEach(getFullMovieDetails)
         })
@@ -225,14 +222,12 @@ function getActorsFilmography(actorID){
 // This function will get the full details of all the movies that are returned in the above functions including title, year released, genres, overview/synopsis, 
     // It will get the full details of all movies retrieved based on a the IDs returned by searching via name/keyword, release year, and actor/actress searched
 function getFullMovieDetails(movie){
-    // console.log(movie);
     let noRating = ['Unrated', 'unrated', 'ur', 'UR', 'nr', 'NR', '']
     fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=credits,release_dates`)
     .then(function(response){
         return response.json()
     })
     .then(function(data){
-        // console.log(data);
         if(genreID){
             if(data.genres){
                 if(data.genres.length === 0){
@@ -266,7 +261,6 @@ function getFullMovieDetails(movie){
         newMovieID.textContent = data.id;
         let newMovieCast = document.createElement('span');
         newMovieCast.textContent = '';
-        console.log(data.credits);
         if(data.credits.cast){
             for(let i = 0; i < data.credits.cast.length; i++){
                 if(!data.credits.cast[i]){
@@ -359,7 +353,6 @@ function movieCardClickFunctions(){
 
 // This function will update the text of the modal based on what movieCard is clicked
 function upDateModal(movieCard) {
-    console.log(movieCard)
     document.getElementById('modalMovieImage').src = movieCard.childNodes[0].src;
     document.getElementById('modalMovieTitle').innerHTML = `<b>Movie Title: </b>${movieCard.childNodes[1].childNodes[0].textContent}`;
     document.getElementById('modalMovieCast').innerHTML = `<b>Actors/Actresses: </b>${movieCard.childNodes[1].childNodes[5].textContent}`;
@@ -387,7 +380,6 @@ function saveMovieToLocal(movieCard){
         }
     }
     recentMovies.unshift(movieToSave);
-    console.log(recentMovies);
     localStorage.setItem('recentMovies', JSON.stringify(recentMovies));
 }
 
