@@ -386,7 +386,16 @@ function saveMovieToLocal(movieCard){
 //===================================================================================================================================================================================
 // THIS FUNCTION IS RESPONSIBLE FOR RENDERING EITHER THE moviesNowPlaying() FUNCTION OR THE renderRecentMovies() FUNCTION THAT WILL RENDER ALL MOVIES SAVED IN LOCALSTORAGE
 // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function swapMoviesRendered(){};
+function swapMoviesRendered(){
+    // Toggle being set to now playing movies is true
+    // Toggle being set to recent movies is false
+    
+    // if(toggle === true){
+    //     getMoviesNowPlaying();
+    // } else if(toggle === false){
+    //     renderRecentMovies()
+    // }
+};
 
 function renderRecentMovies(){
     let recentMoviesArray = JSON.parse(localStorage.getItem('recentMovies'));
