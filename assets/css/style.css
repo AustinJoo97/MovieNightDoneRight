@@ -210,11 +210,7 @@ hr {
     text-align: center;
     color: black;
     margin-top: 30px;
-    overflow: hidden;
-}
-/* Hide scrollbar for Chrome, Safari and Opera */
-.restaurantContainer::-webkit-scrollbar {
-    display: none;
+
 }
 
 .restaurantContainer p {
