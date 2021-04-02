@@ -446,15 +446,18 @@ function getRestaurantByZipcode(){
     .then(function (data) {
         let restInfo = data.data
         for (let i = 0; i < restInfo.length; i++){
-            let restaurantName = document.createElement('h6')
+            let restaurantName = document.createElement('h4')
             let restaurantPhone = document.createElement('p')
             let restaurantAddress = document.createElement('p')
+            let restaurantContainerS = document.createElement('div')
             restaurantName.textContent = restInfo[i].restaurant_name;
             restaurantPhone.textContent = restInfo[i].restaurant_phone;
             restaurantAddress.textContent = restInfo[i].address.formatted;
-            restaurantContainer.appendChild(restaurantName)
-            restaurantContainer.appendChild(restaurantPhone)
-            restaurantContainer.appendChild(restaurantAddress)
+            restaurantContainerS.appendChild(restaurantName)
+            restaurantContainerS.appendChild(restaurantPhone)
+            restaurantContainerS.appendChild(restaurantAddress)
+            restaurantContainerS.setAttribute('class','restaurantContainer')
+            restaurantContainer.appendChild(restaurantContainerS)
         }
     })
     userZip.value = '';

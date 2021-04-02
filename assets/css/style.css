@@ -21,9 +21,6 @@ body {
     width: 100%;
 }
 
-#searchOptions {
-
-}
 
 .input-custom {
     width: 100px;
@@ -87,8 +84,6 @@ body {
     border-style:none ;
 }
 
-
-
 #searchQuery:focus {
     background-color: rgb(255, 255, 255);
 }
@@ -130,7 +125,7 @@ body {
 .movieCard {
     width: 210px;
     height: min-content;
-    /* outline instead of border so when width increase boxes arent moved, if border was used the border would grow and push cards out of wack */
+    /* outline instead of border so when width increase boxes aren't moved, if border was used the border would grow and push cards out of wack */
     outline:2px solid #3fca95 ;
     margin: 10px auto;
     text-align: center;
@@ -187,12 +182,48 @@ body {
     font-family: 'Dela Gothic One', cursive;
 }
 
+#exampleModal1 {
+    background-color: #292b2c;
+    outline: none;
+    border-color: #3fca95;
+    color: white;
+    overflow: hidden;
+}
+
+#exampleModal1 input {
+    color:black;
+    outline: none;
+}
+
+#exampleModal1 b {
+    color:#89ffd2  ;
+}
+
 hr {
     border-color:#32946e ;
     margin-top: 40px;
     margin-bottom: 0;
 }
 
+.restaurantContainer {
+    background-color: #6f9285;
+    text-align: center;
+    color: black;
+    margin-top: 30px;
+    overflow: hidden;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.restaurantContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.restaurantContainer p {
+    margin: 0;
+}
+
+.restaurantContainer h4 {
+    color: rgb(255, 230, 0);
+}
 .recentBtn {
     position: relative;
     padding: 0px 5px;
