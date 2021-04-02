@@ -76,25 +76,28 @@ body {
 }
 
 #searchQuery {
-    position: relative;
-    bottom:1px;
-    padding: 0;
+    /* position: relative; */
+    /* bottom:1px; */
+    /* padding: 0; */
     margin: 0;
     width: 160px;
-    height: 26px;
+    height: inherit;
     outline: none;
     background-color: rgb(192, 192, 192);
     border-style:none ;
 }
+
+
 
 #searchQuery:focus {
     background-color: rgb(255, 255, 255);
 }
 
 #searchCriteria {
-    position: relative;
+    /* position: relative; */
     width: 100px;
-    padding-left:0px ;
+    height: inherit;
+    padding-left: 0px ;
 }
 
 #searchCriteria option {
@@ -116,8 +119,9 @@ body {
 }
 
 #searchButton {
-    position: relative;
-    padding: 5px;  
+    /* position: relative; */
+    padding: 5px;
+    height: inherit;  
 }
 
 /* #renderedMovies{
@@ -179,18 +183,18 @@ body {
 
 
 #criteriaInput h3 {
-    text-shadow:3px 3px 15px #9ce746 ;
+    text-shadow:3px 3px 15px rgb(31, 173, 255) ;
     font-family: 'Dela Gothic One', cursive;
 }
 
 hr {
     border-color:#32946e ;
     margin-top: 40px;
+    margin-bottom: 0;
 }
 
 .recentBtn {
     position: relative;
-    top:-15px;
     padding: 0px 5px;
     background-color: #32946e;
     outline: none;
@@ -202,12 +206,11 @@ hr {
     height: 26px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    margin: 0 !important;
 }
 
 .criBtn {
     position: relative;
-    top:-42px;
-    left: 10px;
     padding: 0px 5px;
     background-color: #32946e;
     outline: none;
@@ -315,6 +318,9 @@ hr {
         width: 100%;
         margin-bottom: 5px;
     }
+    #searchQuery {
+        bottom: 2px;
+    }
 }
 
 @media screen and (max-width: 435px) {
@@ -325,6 +331,6 @@ hr {
 
 @media screen and (max-width: 380px) {
     .movieCard {
-        width: 160px;
+        width: 150px;
     }
 }

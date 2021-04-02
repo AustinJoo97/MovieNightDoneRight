@@ -24,14 +24,14 @@
             </div>
             <form id='searchOptions' class="column">
                 <div class="row row-search">
-                    <select class="small-12 medium-3 btn rounded-left " id='searchCriteria' selected='Search by:'>
+                    <select class="small-12 medium-3 btn column rounded-left " id='searchCriteria' selected='Search by:'>
                         <option value='allMovies' selected>All Movies</option>
                         <option value='actor'>Actors</option>
                         <option value='yearReleased'>Year</option>
                         <option value='title'>Title</option>
                     </select>
-                    <input class="mr-0" size="25"  id='searchQuery'>
-                    <button class="btn rounded-right ms-0" id='searchButton'>Search</button>
+                    <input class="mr-0 column" size="25"  id='searchQuery'>
+                    <button class="btn rounded-right column ms-0" id='searchButton'>Search</button>
                 </div>
 
             </form>
@@ -60,16 +60,17 @@
 
     <hr>
     <div class="row">
-        <input  type="checkbox" id="recentBtn" name="recentBtn">
-        <label class="top-bar-right recentBtn btn"  for="recentBtn" id='toggleRendered'>Newly Released Movies</label>
+        <div class="column genreColumn">
+            <select id='genresDropdown' class="criBtn btn" >
+                <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
+            </select>
+        </div>
+        <div class="column recentCol">
+            <input  type="checkbox" id="recentBtn" name="recentBtn">
+            <label class="top-bar-right recentBtn btn"  for="recentBtn" id='toggleRendered'>Newly Released Movies</label>
+        </div>
     </div>
-    <div class="row">
-           <div class=" m-a">
-        <select id='genresDropdown' class="criBtn btn" >
-            <option value='none' id="selectGenre" selected disabled hidden>Select a Genre</option>
-        </select>
-    </div> 
-    </div>
+
 
     
 
