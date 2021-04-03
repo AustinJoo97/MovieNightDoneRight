@@ -28,7 +28,7 @@ enjoy a night of fun entertainment and good food.
 ```
 GIVEN a movie application 
 WHEN I load the applicationThen a multicomponent nav-bar and a component with newly released moviecards will be rendered
-These movie cards will display the movies promo image, name, year released and genre
+THEN these movie cards will display the movies promo image, name, year released and genre
 WHEN I click on the “categories” dropdown of the nav-bar and select a genre
 THEN multiple movie cards of that genre will be displayed in place of the initial new movies
 WHEN I click the search criteria button
