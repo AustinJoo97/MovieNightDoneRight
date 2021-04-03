@@ -8,17 +8,27 @@ Dawit Jones
 ```
 ## The Task
 ```
-This project utilizes data from two third party API’s: [The Movie Database API] (https://developers.themoviedb.org/) and [Documenu – Restaurant MenuAPI] (https://api.documenu.com). This application is perfect for the everyday movie enthusiast. This application allows users to search through a catalog of films based upon genre. Upon selection of a genre the user is presented with a set number of films to choose from for their liking. Additionally, there will be a search bar to allow users to manually select a film as well. For each movie, the user selects they will be presented with the year released, genre, synopsis, rating, review, and actors. Lastly, along with the selection of a film,the user will be able to enter their zip code and a list of five restaurants will presented to them.
+This project utilizes data from two third party API’s: [The Movie Database API] (https://
+developers.themoviedb.org/) and [Documenu – Restaurant MenuAPI] (https://api.documenu.com.
+This application is perfect for the everyday movie enthusiast. This application allows users
+to search through a catalog of films based upon genre. Upon selection of a genre the user is
+presented with a set number of films to choose from for their liking. Additionally, there
+will be a search bar to allow users to manually select a film as well. For each movie, the
+user selects they will be presented with the year released, genre, synopsis, rating, review,
+and actors. Lastly, along with the selection of a film,the user will be able to enter their
+zip code and a list of five restaurants will presented to them.
 ```
 ## User Story
 ```
-As an avid movie watcher and food connoisseur.I want an application that will allow me to search for movies and be given a possible restaurant located within my zip code.So, I can enjoy a night of fun entertainment and good food.
+As an avid movie watcher and food connoisseur.I want an application that will allow me to
+search for movies and be given a possible restaurant located within my zip code.So, I can
+enjoy a night of fun entertainment and good food.
 ```
 ## Acceptance Criteria
 ```
 GIVEN a movie application 
 WHEN I load the applicationThen a multicomponent nav-bar and a component with newly released moviecards will be rendered
-These movie cards will display the movies promo image, name, year released and genre
+THEN these movie cards will display the movies promo image, name, year released and genre
 WHEN I click on the “categories” dropdown of the nav-bar and select a genre
 THEN multiple movie cards of that genre will be displayed in place of the initial new movies
 WHEN I click the search criteria button
@@ -34,9 +44,9 @@ THEN the object with all the movies information will be saved to localStorage
 WHEN I press a toggle button
 THEN all the movies saved to localStorage will replace the movie cards on the DOM
 ```
-## Deployed Site 
+## Deployed Site Link
 ```
 
 ```
 ## Screenshot of Site
-![alt text](https://github.com/AustinJoo97/MovieNightDoneRight/blob/main/assets/images/moivenight_screenshot.jpg?raw=true)
+![alt text](https://github.com/AustinJoo97/MovieNightDoneRight/blob/main/assets/images/moivenight_screenshot.png?raw=true)
