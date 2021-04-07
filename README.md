@@ -1,10 +1,17 @@
 # Movie Night, Done Right!
+
+## Deployed Site Link
 ```
-The Team:
+https://austinjoo97.github.io/MovieNightDoneRight/
+```
+
+## The Team
+```
 Brandon Ford [https://github.com/brandonfordd]
 Ashquinn Gordon [https://github.com/Ashquinn]
 Austin Joo [https://github.com/AustinJoo97]
 ```
+
 ## The Task
 ```
 This project utilizes data from two third party API’s: [The Movie Database API] (https://
@@ -42,10 +49,6 @@ WHEN I click on the movieThen, in addition to the modal opening
 THEN the object with all the movies information will be saved to localStorage
 WHEN I press a toggle button
 THEN all the movies saved to localStorage will replace the movie cards on the DOM
-```
-## Deployed Site Link
-```
-https://austinjoo97.github.io/MovieNightDoneRight/
 ```
 ## Screenshot of Site
 ![alt text](https://github.com/AustinJoo97/MovieNightDoneRight/blob/main/assets/images/moivenight_screenshot.png?raw=true)
