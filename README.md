@@ -45,7 +45,7 @@ THEN all the movies saved to localStorage will replace the movie cards on the DO
 ```
 ## Deployed Site Link
 ```
-
+https://austinjoo97.github.io/MovieNightDoneRight/
 ```
 ## Screenshot of Site
 ![alt text](https://github.com/AustinJoo97/MovieNightDoneRight/blob/main/assets/images/moivenight_screenshot.png?raw=true)
