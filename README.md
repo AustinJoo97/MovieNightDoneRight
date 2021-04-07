@@ -12,6 +12,16 @@ Ashquinn Gordon [https://github.com/Ashquinn]
 Austin Joo [https://github.com/AustinJoo97]
 ```
 
+## Technologies Used
+```
+HTML5
+CSS3
+Foundation
+Javascript
+TMDB API
+Documenu API
+```
+
 ## The Task
 ```
 This project utilizes data from two third party API’s: [The Movie Database API] (https://
