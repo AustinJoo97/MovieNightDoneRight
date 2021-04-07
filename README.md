@@ -1,10 +1,9 @@
-# Group 7 - MovieNightDoneRight
+# Movie Night, Done Right!
 ```
-Group 7 members:
-Ashquinn Gordon
-Brandon Ford
-Austin Joo
-Dawit Jones
+The Team:
+Brandon Ford [https://github.com/brandonfordd]
+Ashquinn Gordon [https://github.com/Ashquinn]
+Austin Joo [https://github.com/AustinJoo97]
 ```
 ## The Task
 ```
